@@ -1,0 +1,33 @@
+#box {
+    padding: 66px 20px;
+    margin-top: 65px;
+    margin-bottom: 65px;
+    border: 1px solid  #d7d7d9;
+    border-radius: 6px;
+    box-shadow: 0 15px 36px 1px rgba(51, 51, 51, 0.1);
+    -moz-box-shadow: 0 15px 36px 1px rgba(51, 51, 51, 0.1);
+    -webkit-box-shadow: 0 15px 36px 1px rgba(51, 51, 51, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 510px;
+    .button-group {
+        text-align: center;
+        * {
+            font-size: 14px;
+        }
+        button {
+            width: 150px;
+            padding: 10px 0;
+        }
+        .light {
+            background-color: #eaeaea;
+            color: #727272;
+            margin-right: 24px;
+        }
+        .primary {
+            background-color: #2179ee;
+            color: white;
+        }
+    }
+}

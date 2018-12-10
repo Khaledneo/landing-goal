@@ -1,0 +1,50 @@
+$black: #333333;
+.information {
+    text-align: center;
+    font-size: 26px;
+    color: $black;
+    * {
+        font-size: 26px;
+    }
+    input {
+        border: none !important;
+        background-image: none !important;
+        background-color: transparent !important;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+        margin: 0 15px;
+        text-align: center;
+        border-bottom: 2px solid $black !important;
+        color: #2179ee;
+        &:focus {
+            outline: none;
+        }
+        &[name="age"],&[name="years"] {
+            &::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            -moz-appearance: textfield;
+            max-width: 35px;
+            width: 35px;
+        }
+    }
+    .selectpicker {
+        outline: none;
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        color: #2179ee;
+        margin-left: 15px;
+        border-bottom: 2px solid $black!important;
+    }
+    .long-text {
+        max-width: 180px;
+        width: 180px;
+    }
+}
