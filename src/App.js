@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Goal from "./containers/goal-calculator";
+import Goal from "./containers/goal/goal-calculator";
 
 class App extends Component {
   render() {
