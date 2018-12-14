@@ -1,5 +1,8 @@
 $black: #333333;
 footer {
+    * {
+        color: $black;
+    }
     margin-top: 80px;
     padding-top: 80px;
     border-top: 2px solid #d7d7d9;
@@ -24,7 +27,6 @@ footer {
             }
         }
         h6 {
-            color: $black !important;
             font-weight: bold;
         }
         ul {
@@ -61,5 +63,10 @@ footer {
         img {
             height: 20px;
         }
+    }
+    .copyright {
+        font-size: 12px;
+        text-align: center;
+        padding: 24px 0;
     }
 }

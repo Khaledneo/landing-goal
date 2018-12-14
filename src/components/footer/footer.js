@@ -167,8 +167,8 @@ const footer = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-12 ">
-                                
+                        <div className="col-md-12 copyright">
+                            © NBK Capital SmartWealth
                         </div>
                     </div>
                 </div>

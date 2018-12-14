@@ -10,9 +10,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 510px;
+    height: auto;
     .button-group {
-
         text-align: center;
         * {
             font-size: 14px;
@@ -34,6 +33,18 @@
         .primary {
             background-color: #2179ee;
             color: white;
+        }
+    }
+}
+@media (max-width: 767px) {
+    .button-group {
+        button {
+            &:first-child {
+                margin-bottom: 20px;
+            }
+            display: block;
+            width: 100% !important;
+            margin: 0;
         }
     }
 }

@@ -16,6 +16,38 @@ const numberMask = createNumberMask({
     thousandsSeparatorSymbol: ","
 });
 
+const optionsReasons = [{
+        key: 3,
+        text: "major purchases",
+        value: 'major_purchase'
+    },
+    {
+        key: 1,
+        text: "education",
+        value: 'education'
+    },
+    {
+        key: 2,
+        text: "retirement",
+        value: 'retirement'
+    },
+    {
+        key: 4,
+        text: "safety net",
+        value: 'safety_net'
+    }
+];
+
+const getDropDownOptions = () => {
+    return optionsReasons.map((reason)=>{
+        return (
+            <option key={reason.key} value={reason.value}>
+                {reason.text}
+            </option>
+        )
+    });
+};
+
 const information = (props) => {
     return (
         <Aux>
@@ -28,9 +60,7 @@ const information = (props) => {
                 value="25"
                 placeholder="25"/> years old and i want to invest for
                 <select className="selectpicker" onChange={handleSelect}>
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                    {getDropDownOptions()}
                 </select>
                 <br/>
                 In                
