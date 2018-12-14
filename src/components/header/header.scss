@@ -1,8 +1,10 @@
 $black: #333333;
-
 nav {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    * {
+        font-size: 16px;
+    }
     ul {
         a {
             color: $black !important;
@@ -11,6 +13,25 @@ nav {
     form {
         a {
             color: $black !important;
+            &:first-child {
+                border: none !important;
+            }
+            &:nth-child(2) {
+                border-color: $black;
+                &:hover {
+                    border-color: $black;
+                }
+            }
+            &:last-child {
+                color: white !important;
+                background-color: #2179ee;
+                border-color: #2179ee;
+                &:hover {
+                    color: white !important;
+                    border-color: #2179ee;
+                    background-color: #2179ee;
+                }
+            }
         }
     }
     img.logo {
@@ -27,4 +48,32 @@ nav {
     -o-transition: background 0.5s ease-out;
     transition: background 0.5s ease-out;
     border-bottom: 2px solid #d7d7d9;
+    form {
+        a {
+            &:not(:last-child) {
+                margin-right: 16px;
+            }
+        }
+    }
 }
+
+@media (max-width: 991px) {
+    nav {
+        * {
+            font-size: 14px;
+        }
+        .logo {
+            width: 120px !important;
+        }
+        form {
+            a {
+                font-size: 14px !important;
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+;

@@ -3,7 +3,9 @@ import Aux from "../../Hoc/Aux";
 import "./header.scss";
 import logo from "../../assets/logo-black.svg";
 
-var leftMenu = [
+const englishText = /^[A-Za-z]+$/;
+
+const leftMenu = [
     {
         id: "wsw",
         title: "Why SmartWealth",
@@ -26,10 +28,10 @@ var leftMenu = [
     }
 ];
 
-var rightMenu = [
+const rightMenu = [
     {
         id: "localization",
-        title: "English",
+        title: "عربي",
         url:"nbkcapitalsmartwealth.com/why-smart-wealth"
     },
     {
@@ -58,7 +60,7 @@ const getRightMenu = () => {
     return (
         <form className="from-inline" action="">
             {rightMenu.map((page)=>{
-                return <a className="btn  btn-outline-light rounded-0" key={page.id} href={page.url}>{page.title}</a>
+                return <a className={ englishText.test(page.title) ?  "btn  btn-outline-light rounded-0" : "btn cairo  btn-outline-light rounded-0" } key={page.id} href={page.url}>{page.title}</a>
             })}
         </form>
     )

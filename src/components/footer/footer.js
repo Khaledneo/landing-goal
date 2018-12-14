@@ -10,6 +10,9 @@ import playStroe from "../../assets/icons/android.svg";
 
 import "./footer.scss";
 
+const englishText = /^[A-Za-z]+$/;
+
+
 const changeLanguage = (langTarget) => {
     localStorage.setItem("nbk_lang",langTarget);
 };
@@ -119,7 +122,7 @@ const getSubPages = (arrayOfPages) => {
         arrayOfPages.length ? arrayOfPages.map(page => {
             return (
                 <li key={page.title}>
-                    <a href={page.url} onClick={page.handler && page.handler}>
+                    <a className={!englishText.test(page.title)  ? "cairo" : ""} href={page.url} onClick={page.handler && page.handler}>
                         {page.title}
                     </a>
                 </li>
@@ -157,8 +160,8 @@ const footer = () => {
                         <div className="footer-pages col-md-6 align-items-center d-flex flex-column flex-wrap">
                             { getPages() }
                         </div>
-                        <div class="col-md-4  d-flex flex-column ">
-                            <div class="download">
+                        <div className="col-md-4  d-flex flex-column ">
+                            <div className="download">
                                 <h6>Download the app</h6>
                                 <div>
                                     { getDownloads() }
