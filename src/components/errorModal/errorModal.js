@@ -1,17 +1,17 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
 
-const errorModal = () => {
+const errorModal = (props) => {
     return (
-        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal"
+        <div className="modal fade" id="errorModal" tabIndex="-1" role="dialog" aria-labelledby="errorModal"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+            <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLongTitle">Error</h5>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <div className="modal-body">
+                        {props.errorMessage}
                     </div>
                 </div>
             </div>
