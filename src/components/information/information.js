@@ -5,11 +5,6 @@ import createNumberMask from "text-mask-addons/dist/createNumberMask";
 
 import "./information.scss";
 
-
-const handleSelect = (e) =>{
-    console.log(e.target.value);
-};
-
 const numberMask = createNumberMask({
     prefix: "",
     integerLimit: 9,
@@ -57,9 +52,10 @@ const information = (props) => {
                 mask={[/\d/,/\d/]}
                 type="text"
                 name="age"
-                value="25"
+                onChange={props.onChangeAge}
+                value={props.userInformation.age}
                 placeholder="25"/> years old and i want to invest for
-                <select className="selectpicker" onChange={handleSelect}>
+                <select className="selectpicker" value={props.userInformation.reason} onChange={props.onChangeReason}>
                     {getDropDownOptions()}
                 </select>
                 <br/>
@@ -68,7 +64,8 @@ const information = (props) => {
                 mask={[/\d/,/\d/]}
                 type="text"
                 name="years"
-                value="25"
+                value={props.userInformation.horizon}
+                onChange={props.onChangeHorizon}
                 placeholder="25"/>
                 years, I would like to have saved $
                 <MaskedInput
@@ -76,7 +73,8 @@ const information = (props) => {
                 mask={numberMask}
                 type="text"
                 name="amount"
-                value="300,000"
+                value={props.userInformation.amount}
+                onChange={props.onChangeAmount}
                 placeholder="300,000"/> towards my goal.
             </div>
         </Aux>
