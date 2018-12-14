@@ -1,11 +1,21 @@
 $black: #333333;
 nav {
+    background-color: white;
     padding-top: 25px !important;
     padding-bottom: 25px !important;
     * {
         font-size: 16px;
     }
+    .navbar-toggler {
+        outline: none;
+        &:focus {
+            outline: none;
+        }
+    }
     ul {
+        li {
+            margin: 0 10px;
+        }
         a {
             color: $black !important;
         }
@@ -62,6 +72,9 @@ nav {
         * {
             font-size: 14px;
         }
+        ul li {
+            margin: 0;
+        }
         .logo {
             width: 120px !important;
         }
@@ -74,6 +87,27 @@ nav {
             }
         }
     }
+};
+
+
+@media (max-width: 767px) {
+    nav {
+        form {
+            margin: 50px 0;
+            a {
+                &:first-child {
+                    text-align: left;
+                    margin-right: 0;
+                }
+                &:nth-child(2) {
+                    margin-right: 0 !important;
+                }
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+                display: block !important;
+            }
+        }
+    }
 }
 
-;
