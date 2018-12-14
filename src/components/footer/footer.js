@@ -153,8 +153,8 @@ const footer = () => {
                             <a href="nbkcapitalsmartwealth.com">
                                 <img className="logo" src={logo} alt="logo"/>
                             </a>
-                            <div className="social-media-bar d-flex justify-content-between">
-                                { getSocialMedia() }
+                            <div className="social-media-bar under-logo d-flex justify-content-between">
+                                {  getSocialMedia() }
                             </div>
                         </div>
                         <div className="footer-pages col-md-6 align-items-center d-flex flex-column flex-wrap">
@@ -166,6 +166,9 @@ const footer = () => {
                                 <div>
                                     { getDownloads() }
                                 </div>
+                            </div>
+                            <div className = "social-media-bar under-download  justify-content-between" > 
+                                { getSocialMedia() }
                             </div>
                         </div>
                     </div>

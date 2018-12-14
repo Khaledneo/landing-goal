@@ -15,6 +15,10 @@ footer {
         width: 100% !important;
     }
     .social-media-bar {
+        display: flex;
+        &.under-download {
+            display: none;
+        }
         img {
             height: 17px;
         }
@@ -68,5 +72,36 @@ footer {
         font-size: 12px;
         text-align: center;
         padding: 24px 0;
+    }
+}
+@media (max-width: 767px) {
+    footer {
+        .logo {
+            margin-bottom: 20px;
+        }
+        .footer-pages {
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            height: auto !important;
+            align-items: flex-start !important;
+            ul {
+                margin-bottom: 20px !important;
+            }
+        }
+        .social-media-bar {
+            &.under-logo {
+                display: none !important;
+            }
+            &.under-download {
+                display: block !important;
+                margin: 20px 0; 
+                a {
+                    img {
+                        height: 20px;
+                    }
+                    margin-right: 10px;
+                }
+            }
+        }
     }
 }
