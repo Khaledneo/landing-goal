@@ -44,7 +44,6 @@ const getDropDownOptions = () => {
 };
 
 const information = (props) => {
-    console.log(JSON.stringify(props,null,2));
     return (
         <Aux>
             <div className="information">
