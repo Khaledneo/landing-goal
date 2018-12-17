@@ -77,7 +77,6 @@ class Box extends Component {
                         <BoxHeader/>
                         <Information
                          userInformation={this.state.info}
-                         onChangeReason={this.changeReason}
                          onValueChange={this.changeValue}
                           /> 
                         <div className="button-group">
