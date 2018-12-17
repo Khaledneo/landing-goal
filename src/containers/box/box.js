@@ -20,13 +20,14 @@ class Box extends Component {
                 horizon: "",
                 amount: ""
             },
-            errorMessage: "Testing error",
+            errorMessage: "",
             
         };
     }
 
     openModalError = (errorMessage) => {
         this.setState({
+            ...this.state,
             errorMessage: errorMessage
         });
         $("#errorModal").modal("show");
@@ -34,32 +35,46 @@ class Box extends Component {
     };
 
     handleContinue = () => {
-        let age = parseInt(this.state.userInformation.age);
-        if ( age > 99 && age < 18 ) {
+        const { age, reason,horizon,amount } = this.state.info;
+        if (!age || age > 99 || age < 18 ) {
             this.openModalError("Age must be between 18 and 99 years");
+            return;
         }
-    };
-
-    changeAge = (e) => {
-        let age = parseInt(e.target.value);
+        if( !horizon || horizon > 30 || horizon < 5 ) {
+            this.openModalError("Horizon must be between 5 and 30 years");
+            return;
+        }
+        if(amount < 5000){
+            this.openModalError("Amount should be more than $5000");
+            return;
+        } else if (amount > 999999999) {
+            this.openModalError("Amount should be less than $1,000,000,000");
+            return;
+        }
         this.setState({
-            info: {
-                age: !isNaN(age) ? age : ""
-            }
-        });  
-    };
-
-    changeAmount = (e) => {
-        console.log(e.target.value);
-    };
-
-    changeHorizon = (e) => {
-        console.log(e.target.value);
+            ...this.state,
+            errorMessage: ""
+        });
     };
 
     changeReason = (e) => {
         console.log(e.target.value);
+        console.log(e.target.name);
     }; 
+
+    changeValue = (e) => {
+        const inputName = e.target.name;
+        const inputValue = inputName !== "reason" ? inputName !== "amount" ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, "")) : e.target.value;
+        console.log(inputValue);
+        console.log(inputName);
+        this.setState({
+            ...this.state,
+            info: {
+                ...this.state.info,
+                [inputName]: inputName !== "reason" ? !isNaN(inputValue) ? inputValue : "" : inputValue
+            }
+        })
+    };
 
     render() {
         return (
@@ -71,9 +86,8 @@ class Box extends Component {
                         <Information
                          userInformation={this.state.info}
                          onChangeReason={this.changeReason}
-                         onChangeAmount={this.changeAmount}
-                         onChangeHorizon={this.changeHorizon}
-                         onChangeAge={this.changeAge} /> 
+                         onValueChange={this.changeValue}
+                          /> 
                         <div className="button-group">
                             <button className="btn rounded-0 light">Back</button>
                             <button className="btn rounded-0 primary" onClick={this.handleContinue}>Continue</button>

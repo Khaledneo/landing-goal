@@ -24,7 +24,7 @@ $black: #333333;
         &:focus {
             outline: none;
         }
-        &[name="age"],&[name="years"] {
+        &[name="age"],&[name="horizon"] {
             &::-webkit-outer-spin-button {
                 -webkit-appearance: none;
                 margin: 0;

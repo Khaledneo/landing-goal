@@ -44,7 +44,7 @@ const getDropDownOptions = () => {
 };
 
 const information = (props) => {
-    console.log(props.userInformation.age)
+    console.log(JSON.stringify(props,null,2));
     return (
         <Aux>
             <div className="information">
@@ -53,10 +53,10 @@ const information = (props) => {
                 mask={[/\d/,/\d/]}
                 type="text"
                 name="age"
-                onChange={props.onChangeAge}
+                onChange={props.onValueChange}
                 value={props.userInformation.age}
                 placeholder="25"/> years old and i want to invest for
-                <select className="selectpicker" value={props.userInformation.reason} onChange={props.onChangeReason}>
+                <select className="selectpicker" name="reason" value={props.userInformation.reason} onChange={props.onValueChange}>
                     {getDropDownOptions()}
                 </select>
                 <br/>
@@ -64,9 +64,9 @@ const information = (props) => {
                 <MaskedInput
                 mask={[/\d/,/\d/]}
                 type="text"
-                name="years"
+                name="horizon"
                 value={props.userInformation.horizon}
-                onChange={props.onChangeHorizon}
+                onChange={props.onValueChange}
                 placeholder="25"/>
                 years, I would like to have saved $
                 <MaskedInput
@@ -75,7 +75,7 @@ const information = (props) => {
                 type="text"
                 name="amount"
                 value={props.userInformation.amount}
-                onChange={props.onChangeAmount}
+                onChange={props.onValueChange}
                 placeholder="300,000"/> towards my goal.
             </div>
         </Aux>
