@@ -31,7 +31,6 @@ class Box extends Component {
             errorMessage: errorMessage
         });
         $("#errorModal").modal("show");
-        // TODO: Clear the errorMessage when the modal is closed
     };
 
     handleContinue = () => {
@@ -57,16 +56,9 @@ class Box extends Component {
         });
     };
 
-    changeReason = (e) => {
-        console.log(e.target.value);
-        console.log(e.target.name);
-    }; 
-
     changeValue = (e) => {
         const inputName = e.target.name;
         const inputValue = inputName !== "reason" ? inputName !== "amount" ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, "")) : e.target.value;
-        console.log(inputValue);
-        console.log(inputName);
         this.setState({
             ...this.state,
             info: {
