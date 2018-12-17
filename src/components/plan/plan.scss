@@ -6,4 +6,11 @@
         width: 100%;
         max-width: 100%;
     }
+    .plan-image {
+        min-height: 235px;
+        height: 235px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }

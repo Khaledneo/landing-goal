@@ -9,11 +9,6 @@ import Recommendation from '../recommendation/recommendation';
 
 class Box extends Component {
 
-    
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Aux>

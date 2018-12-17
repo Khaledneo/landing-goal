@@ -32,6 +32,7 @@ class Goal extends Component {
 
     handleContinue = () => {
         const { age, reason,horizon,amount } = this.state.info;
+        console.log(reason);
         if (!age || age > 99 || age < 18 ) {
             this.openModalError("Age must be between 18 and 99 years");
             return;

@@ -5,10 +5,13 @@ import "./plan.scss";
 
 
 export const plan = (props) => {
+    const bakgroundImage = {
+        backgroundImage: `url(${props.image})`
+    };
     return (
         <Aux>
             <div className="plan">
-                <img src={props.image}/>
+                <div className="plan-image" style={bakgroundImage}></div>
             </div>
         </Aux>
     )
