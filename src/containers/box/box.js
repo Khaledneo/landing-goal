@@ -14,7 +14,6 @@ class Box extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            age: "",
             info: {
                 age: "",
                 reason: "",
@@ -42,8 +41,12 @@ class Box extends Component {
     };
 
     changeAge = (e) => {
-        const age = parseInt(e.target.value);
-        this.setState({ age: isNaN(age) ? age : "" });
+        let age = parseInt(e.target.value);
+        this.setState({
+            info: {
+                age: !isNaN(age) ? age : ""
+            }
+        });  
     };
 
     changeAmount = (e) => {

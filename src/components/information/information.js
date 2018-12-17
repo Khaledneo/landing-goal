@@ -44,6 +44,7 @@ const getDropDownOptions = () => {
 };
 
 const information = (props) => {
+    console.log(props.userInformation.age)
     return (
         <Aux>
             <div className="information">
