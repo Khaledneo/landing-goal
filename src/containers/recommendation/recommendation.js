@@ -47,6 +47,7 @@ class Recommendation extends Component {
         return (
             <Aux>
                 <div className="recommendation">
+                    <p className="result-title">In order for you to reach your goal of XXXX in YY years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.getPlans() }
                     </div>

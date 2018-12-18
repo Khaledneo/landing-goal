@@ -4,7 +4,7 @@ const noteBox = () => {
     return (
         <div className="note">
             <p>
-                <strong>Note: </strong>The above funding plans are for illustrative purposes and are based on your inputs. We have assumed a default balanced risk tolerance of 6/10 for this analysis. To get a more accurate plan, please complete opening your account to have your risk tolerance assessed. Projections are based on historical returns for illustrative purposes. Past performance is not indicative of future performance.
+                <strong>Note: </strong> Your selection of a plan is not an obligation for you to fund or commit the the schedule. By selecting a funding plan, it will help us to provide you with customized advice and make sure you are on track to meet your goals.
             </p>
         </div>
     )
