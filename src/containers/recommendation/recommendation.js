@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { plan as Plan } from "../../components/plan/plan";
 import Aux from "../../Hoc/Aux";
+import { noteBox as NoteBox } from "../../components/note/noteBox";
 import "./recommendation.scss";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
@@ -9,10 +10,6 @@ import yearlyImage from "../../assets/images/yearly.jpg";
 
 class Recommendation extends Component {
 
-    constructor(props) {
-        super(props);
-        console.log(JSON.stringify(props,null,2));
-    }
     
     plansImages = [{
         name: "Quarterly",
@@ -39,7 +36,7 @@ class Recommendation extends Component {
         });
         return plans.map(plan => {
             return (
-                <div key={plan.name} className="col-md-4">
+                <div key={plan.name} className="col-lg-4">
                     <Plan  planData={plan}/>
                 </div>
             )
@@ -52,6 +49,11 @@ class Recommendation extends Component {
                 <div className="recommendation">
                     <div className="row">
                         { this.getPlans() }
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <NoteBox />
+                        </div>
                     </div>
                 </div>
             </Aux>

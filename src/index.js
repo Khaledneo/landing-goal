@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { API_STAGING, API_PRODUCTION } from "./constants/constants";
+import { API_PRODUCTION } from "./constants/constants";
 import axios from "axios";
 
 axios.defaults.baseURL = API_PRODUCTION;

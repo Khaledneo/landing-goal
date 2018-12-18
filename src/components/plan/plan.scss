@@ -23,6 +23,7 @@
     }
     .data {
         padding: 24px;
+        padding-bottom: 0;
         div.custom-row {
             font-size: 14px;
             border-bottom: 2px solid #d8d8da;
@@ -44,19 +45,21 @@
                 }
             }
         }
-        .chart {
-            margin-top: 24px;
-            .chart-title {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                span {
-                    font-size: 14px;
+    }
+            .chart {
+                margin-top: 24px;
+                margin-bottom: 24px;
+                .chart-title {
+                    padding: 0 24px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                     span {
-                        color: #787878;
+                        font-size: 14px;
+                        span {
+                            color: #787878;
+                        }
                     }
                 }
             }
-        }
-    }
 }
