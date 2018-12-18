@@ -9,10 +9,10 @@ class Goal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                age: "",
-                reason: "",
-                horizon: "",
-                amount: ""
+                age: "18",
+                reason: "education",
+                horizon: "5",
+                amount: "5555"
         };
     };
 

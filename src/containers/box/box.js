@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import Recommendation from '../recommendation/recommendation';
 import Aux from "../../Hoc/Aux";
+import axios from "axios";
 import Goal from "../goal/goal";
 import './box.scss';
 
@@ -13,9 +14,116 @@ const $ = window.$;
 class Box extends Component {
 
     constructor(props) {
+        const dummyData = 
+            [
+              {
+                "name": "Quarterly",
+                "frequency": 4,
+                "initial_investment": 5000,
+                "recurring_investment": -68,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5003
+                  ],
+                  [
+                    "2",
+                    5006
+                  ],
+                  [
+                    "3",
+                    5010
+                  ],
+                  [
+                    "4",
+                    5013
+                  ],
+                  [
+                    "5",
+                    5017
+                  ]
+                ]
+              },
+              {
+                "name": "Semi-annual",
+                "frequency": 2,
+                "initial_investment": 5000,
+                "recurring_investment": -135,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5005
+                  ],
+                  [
+                    "2",
+                    5010
+                  ],
+                  [
+                    "3",
+                    5016
+                  ],
+                  [
+                    "4",
+                    5022
+                  ],
+                  [
+                    "5",
+                    5028
+                  ]
+                ]
+              },
+              {
+                "name": "Yearly",
+                "frequency": 1,
+                "initial_investment": 5000,
+                "recurring_investment": -270,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5005
+                  ],
+                  [
+                    "2",
+                    5010
+                  ],
+                  [
+                    "3",
+                    5016
+                  ],
+                  [
+                    "4",
+                    5022
+                  ],
+                  [
+                    "5",
+                    5028
+                  ]
+                ]
+              }
+            ]
+         
         super(props);
         this.state =  {
-            errorMessage: ""
+            errorMessage: "",
+            result: dummyData
         };
     };
 
@@ -37,12 +145,16 @@ class Box extends Component {
             return;
         }
 
-        this.setState({
-            ...this.state,
-            errorMessage: ""
-        },() => {
-            console.log("axios request should be here");
+        // axios.get("/profile/default_recommendations/0/5000/5/7").then(response => {
+        axios.get("/profile/recommendations/0/5000/5/7").then(response => {
+
+            this.setState({
+                result: response.data,
+                errorMessage: ""
+            });
         });
+
+
     };
 
     openModalError = (errorMessage) => {
@@ -53,14 +165,18 @@ class Box extends Component {
         $("#errorModal").modal("show");
     };
 
+    handleView = () => {
+        let length = this.state.result.length;
+        return length ? <Recommendation data={this.state.result}/> : <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>;
+    };
+
     render() {
         return (
             <Aux>
                 <div className="container">
                     <div id="box">
                         <ErrorModal errorMessage={this.state.errorMessage}/>
-                        <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>
-                        {/* <Recommendation /> */}
+                        { this.handleView() }
                     </div>
                 </div>
             </Aux>

@@ -1,4 +1,8 @@
 .plan {
+    * {
+        color: #333333;
+    }
+
     border-radius: 8px;
     box-shadow: 0 6px 28px 0 rgba(51, 51, 51, 0.1);
     overflow: hidden;
@@ -12,5 +16,47 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+    h3 {
+        font-size: 21px;
+        font-weight: bold;
+    }
+    .data {
+        padding: 24px;
+        div.custom-row {
+            font-size: 14px;
+            border-bottom: 2px solid #d8d8da;
+            padding-bottom: 7px;
+            margin-top: 10px;
+            &:first-child {
+                margin-top: 16px;
+            }
+            &:last-child {
+                border: none;
+            }
+            span {
+                &:first-child {
+                    color: #787878;
+                }
+                &:last-child {
+                    text-align: right;
+                    float: right;
+                }
+            }
+        }
+        .chart {
+            margin-top: 24px;
+            .chart-title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span {
+                    font-size: 14px;
+                    span {
+                        color: #787878;
+                    }
+                }
+            }
+        }
     }
 }

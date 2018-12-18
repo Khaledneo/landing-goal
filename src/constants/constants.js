@@ -1,7 +1,9 @@
 const API_TESTING = "https://jsonplaceholder.typicode.com";
-const API_URL = "https://api.nbkcapitalsmartwealth.com/api/v1";
+const API_PRODUCTION = "https://api.nbkcapitalsmartwealth.com/api/v1";
+const API_STAGING = "https://api.staging-nbksmartwealth.com/api/v1";
 
 export {
     API_TESTING,
-    API_URL
+    API_PRODUCTION,
+    API_STAGING
 }
