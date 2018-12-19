@@ -1,4 +1,5 @@
 export const validateGoalsInput = (inputState) => {
+    console.log("called");
     const {
         age,
         reason,
@@ -32,4 +33,8 @@ export const validateGoalsInput = (inputState) => {
     return {
         errorOccurred: false
     }
+};
+
+export const isEqual = (obj1,obj2) => {
+    return JSON.stringify(obj1) === JSON.stringify(obj2) ? true : false;
 };

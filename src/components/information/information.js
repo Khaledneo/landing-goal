@@ -1,15 +1,10 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
+import { numberMask } from "../../util/masks";
 import MaskedInput from "react-text-mask";
-import createNumberMask from "text-mask-addons/dist/createNumberMask";
 
 import "./information.scss";
 
-const numberMask = createNumberMask({
-    prefix: "",
-    integerLimit: 9,
-    thousandsSeparatorSymbol: ","
-});
 
 const optionsReasons = [{
         key: 3,

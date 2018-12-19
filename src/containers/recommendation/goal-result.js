@@ -4,6 +4,7 @@ import Aux from "../../Hoc/Aux";
 import { noteBox as NoteBox } from "../../components/note/noteBox";
 import { settingsInput as SettingsInput } from "../../components/settings/input";
 import "./goal-result.scss";
+import { isEqual,validateGoalsInput } from "../../util/util";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
 import yearlyImage from "../../assets/images/yearly.jpg";
@@ -17,16 +18,21 @@ class goalResults extends Component {
         this.state = {
             settingsCollapsed: false,
             info: {
-                horizon: this.props.amount,
-                amount: this.props.amount,
-                initial_investment: "0"
+                age: this.props.info.age,
+                reason: this.props.info.reason,
+                horizon: this.props.info.horizon,
+                amount: this.props.info.amount,
+                initial_investment: this.props.info.initial_investment
             },
             copy: {
-                horizon: this.props.horizon,
-                amount: this.props.amount,
-                initial_investment: "0"
+                age: this.props.info.age,
+                reason: this.props.info.reason,
+                horizon: this.props.info.horizon,
+                amount: this.props.info.amount,
+                initial_investment: this.props.info.initial_investment
             }
         };
+        console.log(JSON.stringify(this.state,null,2));
     }
 
     plansImages = [{
@@ -51,7 +57,7 @@ class goalResults extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan} target={this.props.amount}/>
+                    <Plan  planData={plan} target={this.props.info.amount}/>
                 </div>
             )
         })
@@ -69,7 +75,20 @@ class goalResults extends Component {
                 }
             });
         } else {
-            console.log("update the state and sendRequest");
+            if(isEqual(this.state.info,this.state.copy)) {
+                return;
+            } else {
+                let validationResult = validateGoalsInput(this.state.copy);
+                if(!validationResult.errorOccurred) {
+                    this.setState({
+                        ...this.state,
+                        info: {
+                            ...this.state.copy
+                        }
+                    })
+                }
+                this.props.onContinue(this.state.copy, validationResult);
+            }
         }
     };
 
@@ -80,7 +99,21 @@ class goalResults extends Component {
     };
 
     handleBlur = () => {
-        console.log("update the state and sendRequest");
+        if(isEqual(this.state.info,this.state.copy)) {
+            return;
+        } else {
+            //TODO: should be located in function
+            let validationResult = validateGoalsInput(this.state.copy);
+            if(!validationResult.errorOccurred) {
+                this.setState({
+                    ...this.state,
+                    info: {
+                        ...this.state.copy
+                    }
+                })
+            }
+            this.props.onContinue(this.state.copy, validationResult);
+        }
     };
 
     handleSettings = () => {
@@ -95,7 +128,7 @@ class goalResults extends Component {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years} {" "}
+                    <p className="result-title">In order for you to reach your goal of ${this.props.info.amount} in {this.props.info.horizon} {" "}
                          years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.plans }

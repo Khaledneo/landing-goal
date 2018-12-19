@@ -1,6 +1,10 @@
 .settings-inputs {
+    padding: 0;
+    label {
+        color:#787878;
+    }
     input {
-        width: 50%;
+        width: 90%;
         display: block;
         border: none;
         background-color: transparent;
@@ -12,8 +16,19 @@
         &:focus {
             outline: none;
         }
-        &:last-child {
+        &.dropdown {
             width: 100%;
         }
+
+    }
+}
+
+@media (max-width: 767px) {
+    .settings-inputs {
+        input {
+            width: 100%;
+        }
+        padding-right: 15px !important;
+        padding-left: 15px !important;
     }
 }

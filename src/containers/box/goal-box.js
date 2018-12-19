@@ -128,23 +128,25 @@ class goalBox extends Component {
               age: "18",
               reason: "education",
               horizon: "5",
-              amount: "5555"
+              amount: "5555",
+              initial_investment: "0"
             }
         };
     };
 
     handleContinue = (userInput, validationResult ) =>  {
-      validationResult.errorOccurred ? this.openModalError(validationResult.errorMessage) : this.fetchResult(userInput.amount,userInput.horizon)
+      validationResult.errorOccurred ? this.openModalError(validationResult.errorMessage) : this.fetchResult(userInput.amount,userInput.horizon,0)
     };
 
-    async fetchResult  (amount,horizon)  {
+    async fetchResult  (amount,horizon,initial_investment)  {
       try {
-          let response = await axios.get(`/profile/default_recommendations/0/${amount}/${horizon}/7`); 
+          let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`); 
           this.setState({
                 result: response.data,
                 errorMessage: "",
                 info: {
                   ...this.state.info,
+                  initial_investment: initial_investment,
                   amount: amount,
                   horizon: horizon
                 }
@@ -158,7 +160,7 @@ class goalBox extends Component {
 
     handleView = () => {
         let length = this.state.result.length;
-        return length ? <GoalResults data={this.state.result} onInputChange={ (info, validationResult) => { this.handleContinue(info, validationResult) }} amount={this.state.info.amount} horizon={this.state.info.horizon}/> : <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
+        return length ? <GoalResults data={this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} info={this.state.info}/> : <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
     };
 
     openModalError = (errorMessage) => {
