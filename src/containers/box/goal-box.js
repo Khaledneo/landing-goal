@@ -15,115 +15,115 @@ class goalBox extends Component {
 
     constructor(props) {
       super(props);
-        // const dummyData = 
-        //     [
-        //       {
-        //         "name": "Quarterly",
-        //         "frequency": 4,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -68,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5003
-        //           ],
-        //           [
-        //             "2",
-        //             5006
-        //           ],
-        //           [
-        //             "3",
-        //             5010
-        //           ],
-        //           [
-        //             "4",
-        //             5013
-        //           ],
-        //           [
-        //             "5",
-        //             5017
-        //           ]
-        //         ]
-        //       },
-        //       {
-        //         "name": "Semi-annual",
-        //         "frequency": 2,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -135,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5005
-        //           ],
-        //           [
-        //             "2",
-        //             5010
-        //           ],
-        //           [
-        //             "3",
-        //             5016
-        //           ],
-        //           [
-        //             "4",
-        //             5022
-        //           ],
-        //           [
-        //             "5",
-        //             5028
-        //           ]
-        //         ]
-        //       },
-        //       {
-        //         "name": "Yearly",
-        //         "frequency": 1,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -270,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5005
-        //           ],
-        //           [
-        //             "2",
-        //             5010
-        //           ],
-        //           [
-        //             "3",
-        //             5016
-        //           ],
-        //           [
-        //             "4",
-        //             5022
-        //           ],
-        //           [
-        //             "5",
-        //             5028
-        //           ]
-        //         ]
-        //       }
-        //     ]
+        const dummyData = 
+            [
+              {
+                "name": "Quarterly",
+                "frequency": 4,
+                "initial_investment": 5000,
+                "recurring_investment": -68,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5003
+                  ],
+                  [
+                    "2",
+                    5006
+                  ],
+                  [
+                    "3",
+                    5010
+                  ],
+                  [
+                    "4",
+                    5013
+                  ],
+                  [
+                    "5",
+                    5017
+                  ]
+                ]
+              },
+              {
+                "name": "Semi-annual",
+                "frequency": 2,
+                "initial_investment": 5000,
+                "recurring_investment": -135,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5005
+                  ],
+                  [
+                    "2",
+                    5010
+                  ],
+                  [
+                    "3",
+                    5016
+                  ],
+                  [
+                    "4",
+                    5022
+                  ],
+                  [
+                    "5",
+                    5028
+                  ]
+                ]
+              },
+              {
+                "name": "Yearly",
+                "frequency": 1,
+                "initial_investment": 5000,
+                "recurring_investment": -270,
+                "horizon": 5,
+                "is_valid": false,
+                "future_values": [
+                  [
+                    "0",
+                    5000
+                  ],
+                  [
+                    "1",
+                    5005
+                  ],
+                  [
+                    "2",
+                    5010
+                  ],
+                  [
+                    "3",
+                    5016
+                  ],
+                  [
+                    "4",
+                    5022
+                  ],
+                  [
+                    "5",
+                    5028
+                  ]
+                ]
+              }
+            ]
          
         this.state =  {
             errorMessage: "",
-            result: [],
+            result: dummyData,
             info: {
               age: "18",
               reason: "education",
@@ -158,7 +158,7 @@ class goalBox extends Component {
 
     handleView = () => {
         let length = this.state.result.length;
-        return length ? <GoalResults data={this.state.result} onInputChange={ (info, validationResult) => { this.handleContinue(info, validationResult) }} target={this.state.info.amount} years={this.state.info.horizon}/> : <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
+        return length ? <GoalResults data={this.state.result} onInputChange={ (info, validationResult) => { this.handleContinue(info, validationResult) }} amount={this.state.info.amount} horizon={this.state.info.horizon}/> : <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
     };
 
     openModalError = (errorMessage) => {

@@ -14,14 +14,19 @@ class goalResults extends Component {
     
     constructor(props) {
         super(props);
-        // we should update the state value from the props
         this.state = {
             settingsCollapsed: false,
-            age: "18",
-            reason: "education",
-            horizon: "5",
-            amount: "5555"
-        }
+            info: {
+                horizon: this.props.amount,
+                amount: this.props.amount,
+                initial_investment: "0"
+            },
+            copy: {
+                horizon: this.props.horizon,
+                amount: this.props.amount,
+                initial_investment: "0"
+            }
+        };
     }
 
     plansImages = [{
@@ -46,10 +51,26 @@ class goalResults extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan} target={this.props.target}/>
+                    <Plan  planData={plan} target={this.props.amount}/>
                 </div>
             )
         })
+    };
+
+    changeValue = (e) => {
+        if(e.key !== "Enter") {
+            const inputName =  e.target.name;
+            const inputValue = inputName !== "reason" ? inputName !== "amount" ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, "")) : e.target.value;
+            this.setState({
+                ...this.state,
+                copy: {
+                    ...this.state.copy,
+                    [inputName]: inputName !== "reason" ? !isNaN(inputValue) ? inputValue : "" : inputValue
+                }
+            });
+        } else {
+            console.log("update the state and sendRequest");
+        }
     };
 
     onSettingsClick = () => {
@@ -58,13 +79,14 @@ class goalResults extends Component {
         });
     };
 
+    handleBlur = () => {
+        console.log("update the state and sendRequest");
+    };
 
-
-    handleSettings = (target, years) => {
-        let userData = { target, years };
+    handleSettings = () => {
         return !this.state.settingsCollapsed && (
         <div className="row">
-            <SettingsInput onChange={(info) => { this.props.onInputChange(info) }} data={ userData }/>
+            <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data={ this.state.copy }/>
         </div>
         )
     };
@@ -73,8 +95,8 @@ class goalResults extends Component {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years}
-                        years, we recommend you follow one of the below plans:</p>
+                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years} {" "}
+                         years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.plans }
                     </div>
@@ -91,7 +113,7 @@ class goalResults extends Component {
                                 Amend your goals and options
                             </span>
                         </div>
-                        { this.handleSettings(this.props.target,this.props.years) }
+                        { this.handleSettings() }
                     </div>
                 </div>
             </Aux>

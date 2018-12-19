@@ -1,46 +1,63 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
+import MaskedInput from "react-text-mask";
+import {  dollarNumberMask,initialDepositNumberMask } from "../../util/masks";
+
 import "./input.scss";
 
-const getInputs = (data) => {
-    const inputs = [{
-        key: "target",
-        name: "Target saving",
-        value: data.target
-    },{
-        key: "horizon",
-        name: "Horizon",
-        value: data.years
-    },{
-        key: "initial_deposit",
-        name: "Initial deposit",
-        value: "$0"
-    },{
-        key: "risk_score",
-        name: "Risk Score",
-        value: "7/10(Balanced)"
-    }];
-    return inputs;
-};
-
-const changeInput = (e) => {
-    console.log(e.target.value);
-};
 
 const settingsInput = (props) => {
-    let inputs = getInputs(props.data).map(input => {
-        return (
-            <div key={input.key} className=" settings-inputs col-6 col-md-3">
-                <label>
-                    { input.name }
-                </label>
-                <input disabled={ input.key === "risk_score" || input.key === "initial_deposit"  ? "disabled" : "" } value={ input.value } onChange={ changeInput }/>
-            </div>
-        )
-    });
     return (
         <Aux>
-                { inputs }                
+            <div className=" settings-inputs col-6 col-md-3">
+                <label>
+                    Target saving
+                </label>
+                <MaskedInput
+                value={props.data.amount}
+                mask={dollarNumberMask}
+                onKeyPress={props.onChange}
+                onBlur={props.onBlur}
+                onChange={props.onChange}
+                type="text"
+                name="amount"
+                />
+            </div>
+            <div className=" settings-inputs col-6 col-md-3">
+                <label>
+                    Horizon
+                </label>
+                <MaskedInput
+                mask={[/\d/,/\d/,' ','y','e','a','r','s']}
+                type="text"
+                name="horizon"
+                value={props.data.horizon}
+                onBlur={props.onBlur}
+                onKeyPress={props.onChange}
+                onChange={props.onChange}
+                placeholder="35 years"/>  
+            </div>
+            <div className=" settings-inputs col-6 col-md-3">
+                <label>
+                    Initial deposit
+                </label>
+                <MaskedInput
+                  className="long-text"
+                  mask={initialDepositNumberMask}
+                  type="text"
+                  name="initial_investment"
+                  value={props.data.initial_investment}
+                  onBlur={props.onBlur}
+                  onKeyPress={props.onChange}
+                  onChange={props.onChange}/>
+            </div>
+            <div className=" settings-inputs col-6 col-md-3">
+                <label>
+                    Risk Score
+                </label>
+                <input disabled="disabled" value="7/10(Balanced)"/>
+            </div>
+              
         </Aux>
     );
 };
