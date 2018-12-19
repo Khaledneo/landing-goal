@@ -14,6 +14,7 @@ const $ = window.$;
 class Box extends Component {
 
     constructor(props) {
+      super(props);
         const dummyData = 
             [
               {
@@ -120,7 +121,6 @@ class Box extends Component {
               }
             ]
          
-        super(props);
         this.state =  {
             errorMessage: "",
             result: dummyData,
@@ -129,7 +129,7 @@ class Box extends Component {
         };
     };
 
-    handleContinue =  (inputState) => {
+    async handleContinue  (inputState) {
         const { age, reason, horizon, amount } = inputState;
         if (!age || age > 99 || age < 18 ) {
             this.openModalError("Age must be between 18 and 99 years");
@@ -148,17 +148,18 @@ class Box extends Component {
         }
 
 
-        // axios.get("/profile/default_recommendations/0/5000/5/7").then(response => {
-        axios.get("/profile/recommendations/0/5000/5/7").then(response => {
-
+        try {
+          // axios.get("/profile/default_recommendations/0/5000/5/7").then(response => {
+            let response = await axios.get("/profile/recommendations/0/5000/5/7") 
             this.setState({
-                result: response.data,
-                errorMessage: "",
-                goalTarget: amount,
-                years: horizon
-            });
-        });
-
+                  result: response.data,
+                  errorMessage: "",
+                  goalTarget: amount,
+                  years: horizon
+              });
+          } catch(exception) {
+              console.log(JSON.stringify(exception,null,2));
+          }
 
     };
 
@@ -172,7 +173,7 @@ class Box extends Component {
 
     handleView = () => {
         let length = this.state.result.length;
-        return length ? <Recommendation data={this.state.result} target={this.state.goalTarget} years={this.state.years}/> : <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>;
+        return length ? <Recommendation data={this.state.result} onInputChange={ (info) => { this.handleContinue(info) }} target={this.state.goalTarget} years={this.state.years}/> : <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>;
     };
 
     render() {

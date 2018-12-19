@@ -1,0 +1,19 @@
+.settings-inputs {
+    input {
+        width: 50%;
+        display: block;
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid #d7d7d9; 
+        padding-bottom: 10px;
+        outline: none;
+        color: #0076ff;
+        font-weight: bold;
+        &:focus {
+            outline: none;
+        }
+        &:last-child {
+            width: 100%;
+        }
+    }
+}

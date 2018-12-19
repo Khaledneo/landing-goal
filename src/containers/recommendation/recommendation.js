@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { plan as Plan } from "../../components/plan/plan";
 import Aux from "../../Hoc/Aux";
 import { noteBox as NoteBox } from "../../components/note/noteBox";
+import { settingsInput as SettingsInput } from "../../components/settings/input";
 import "./recommendation.scss";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
@@ -13,8 +14,13 @@ class Recommendation extends Component {
     
     constructor(props) {
         super(props);
+        // we should update the state value from the props
         this.state = {
-            settingsCollapsed: true
+            settingsCollapsed: false,
+            age: "18",
+            reason: "education",
+            horizon: "5",
+            amount: "5555"
         }
     }
 
@@ -29,7 +35,7 @@ class Recommendation extends Component {
         image: yearlyImage
     }];
 
-    getPlans = () => {
+    get plans() {
         let plans = this.props.data.map(plan => {
             let image = this.plansImages.find(p => p.name === plan.name).image;
             return {
@@ -52,6 +58,17 @@ class Recommendation extends Component {
         });
     };
 
+
+
+    handleSettings = (target, years) => {
+        let userData = { target, years };
+        return !this.state.settingsCollapsed && (
+        <div className="row">
+            <SettingsInput onChange={(info) => { this.props.onInputChange(info) }} data={ userData }/>
+        </div>
+        )
+    };
+
     render () {
         return (
             <Aux>
@@ -59,7 +76,7 @@ class Recommendation extends Component {
                     <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years}
                         years, we recommend you follow one of the below plans:</p>
                     <div className="row">
-                        { this.getPlans() }
+                        { this.plans }
                     </div>
                     <div className="row">
                         <div className="col-12">
@@ -74,7 +91,7 @@ class Recommendation extends Component {
                                 Amend your goals and options
                             </span>
                         </div>
-                        { !this.state.settingsCollapsed && <div>Settings here</div>}
+                        { this.handleSettings(this.props.target,this.props.years) }
                     </div>
                 </div>
             </Aux>
