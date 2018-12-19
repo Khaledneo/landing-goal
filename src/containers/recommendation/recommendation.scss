@@ -10,4 +10,46 @@
         margin: 0 auto;
         margin-bottom: 48px;
     }
+    .advanced-settings {
+        .settings-header {
+            text-align: center;
+        }
+        button {
+            cursor: pointer;
+            font-size: 21px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 56px;
+            margin-bottom: 8px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            &:focus {
+                outline: none;
+            }
+            .down-arrow {
+                display: inline-block;
+                width: 0; 
+                height: 0; 
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 8px solid #333333;
+            }
+            .up-arrow {
+                display: inline-block;
+                width: 0; 
+                height: 0; 
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 8px solid #333333; 
+            }
+        }
+        span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.43;
+            color: #787878;
+        }
+    }
 }

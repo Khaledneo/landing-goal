@@ -11,6 +11,13 @@ import yearlyImage from "../../assets/images/yearly.jpg";
 class Recommendation extends Component {
 
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            settingsCollapsed: true
+        }
+    }
+
     plansImages = [{
         name: "Quarterly",
         image: quarterlyImage
@@ -21,10 +28,6 @@ class Recommendation extends Component {
         name: "Yearly",
         image: yearlyImage
     }];
-
-    componentDidMount () {
-
-    };
 
     getPlans = () => {
         let plans = this.props.data.map(plan => {
@@ -43,11 +46,18 @@ class Recommendation extends Component {
         })
     };
 
+    onSettingsClick = () => {
+        this.setState({
+            settingsCollapsed: !this.state.settingsCollapsed
+        });
+    };
+
     render () {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years} years, we recommend you follow one of the below plans:</p>
+                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years}
+                        years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.getPlans() }
                     </div>
@@ -55,6 +65,16 @@ class Recommendation extends Component {
                         <div className="col-12">
                             <NoteBox />
                         </div>
+                    </div>
+                    <div className="advanced-settings">
+                        <div className="settings-header">
+                            <button onClick={ this.onSettingsClick }>Advanced Settings <div className={ this.state.settingsCollapsed ? "down-arrow" : "up-arrow" }></div>
+                            </button>
+                            <span>
+                                Amend your goals and options
+                            </span>
+                        </div>
+                        { !this.state.settingsCollapsed && <div>Settings here</div>}
                     </div>
                 </div>
             </Aux>
