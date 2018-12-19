@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Aux from "../../Hoc/Aux";
+import { validateGoalsInput } from "../../util/util";
 import {boxHeader as BoxHeader} from "../../components/box-header/box-header";
 import {information as Information} from "../../components/information/information";
 
 
-class Goal extends Component {
+
+class goalInput extends Component {
 
     constructor(props) {
         super(props);
@@ -22,8 +24,14 @@ class Goal extends Component {
         this.setState({
             ...this.state,
             [inputName]: inputName !== "reason" ? !isNaN(inputValue) ? inputValue : "" : inputValue
-        })
+        });
     };
+
+    validateInput = () => {
+        let validationResult = validateGoalsInput(this.state);
+        this.props.onContinue(this.state, validationResult);
+    };
+
 
     render() {
         return (
@@ -35,7 +43,7 @@ class Goal extends Component {
                     /> 
                 <div className="button-group">
                     <button className="btn rounded-0 light">Back</button>
-                    <button className="btn rounded-0 primary" onClick={()=>{ this.props.onContinue(this.state) }}>Continue</button>
+                    <button className="btn rounded-0 primary" onClick={this.validateInput}>Continue</button>
                 </div>
             </Aux>
         )
@@ -43,4 +51,6 @@ class Goal extends Component {
 
 };
 
-export default Goal;
+export  {
+    goalInput
+};

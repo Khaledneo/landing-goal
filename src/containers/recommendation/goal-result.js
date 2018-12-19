@@ -3,13 +3,13 @@ import { plan as Plan } from "../../components/plan/plan";
 import Aux from "../../Hoc/Aux";
 import { noteBox as NoteBox } from "../../components/note/noteBox";
 import { settingsInput as SettingsInput } from "../../components/settings/input";
-import "./recommendation.scss";
+import "./goal-result.scss";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
 import yearlyImage from "../../assets/images/yearly.jpg";
 
 
-class Recommendation extends Component {
+class goalResults extends Component {
 
     
     constructor(props) {
@@ -99,4 +99,6 @@ class Recommendation extends Component {
     }
 };
 
-export default Recommendation;
+export  {
+    goalResults
+};
