@@ -37,7 +37,7 @@ class Recommendation extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan}/>
+                    <Plan  planData={plan} target={this.props.target}/>
                 </div>
             )
         })
@@ -47,7 +47,7 @@ class Recommendation extends Component {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of XXXX in YY years, we recommend you follow one of the below plans:</p>
+                    <p className="result-title">In order for you to reach your goal of ${this.props.target} in {this.props.years} years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.getPlans() }
                     </div>

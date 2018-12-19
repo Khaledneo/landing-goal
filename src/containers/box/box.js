@@ -123,7 +123,9 @@ class Box extends Component {
         super(props);
         this.state =  {
             errorMessage: "",
-            result: dummyData
+            result: dummyData,
+            goalTarget: 6000,
+            years: 30
         };
     };
 
@@ -145,12 +147,15 @@ class Box extends Component {
             return;
         }
 
+
         // axios.get("/profile/default_recommendations/0/5000/5/7").then(response => {
         axios.get("/profile/recommendations/0/5000/5/7").then(response => {
 
             this.setState({
                 result: response.data,
-                errorMessage: ""
+                errorMessage: "",
+                goalTarget: amount,
+                years: horizon
             });
         });
 
@@ -167,7 +172,7 @@ class Box extends Component {
 
     handleView = () => {
         let length = this.state.result.length;
-        return length ? <Recommendation data={this.state.result}/> : <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>;
+        return length ? <Recommendation data={this.state.result} target={this.state.goalTarget} years={this.state.years}/> : <Goal onContinue={ (info)=>{ this.handleContinue(info) } }/>;
     };
 
     render() {
