@@ -160,7 +160,9 @@ class goalBox extends Component {
 
     handleView = () => {
         let length = this.state.result.length;
-        return length ? <GoalResults data={this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} info={this.state.info}/> : <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
+        return length ?
+         <GoalResults data = {this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} info={this.state.info}/> :
+         <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
     };
 
     openModalError = (errorMessage) => {

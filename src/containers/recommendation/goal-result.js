@@ -32,7 +32,6 @@ class goalResults extends Component {
                 initial_investment: this.props.info.initial_investment
             }
         };
-        console.log(JSON.stringify(this.state,null,2));
     }
 
     plansImages = [{
@@ -66,7 +65,7 @@ class goalResults extends Component {
     changeValue = (e) => {
         if(e.key !== "Enter") {
             const inputName =  e.target.name;
-            const inputValue = inputName !== "reason" ? inputName !== "amount" ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, "")) : e.target.value;
+            const inputValue = inputName !== "reason" ? ((inputName !== "amount" && inputName !== "initial_investment") ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, ""))) : e.target.value;
             this.setState({
                 ...this.state,
                 copy: {
@@ -79,18 +78,22 @@ class goalResults extends Component {
                 return;
             } else {
                 let validationResult = validateGoalsInput(this.state.copy);
-                if(!validationResult.errorOccurred) {
-                    this.setState({
-                        ...this.state,
-                        info: {
-                            ...this.state.copy
-                        }
-                    })
-                }
+                this.updateStateInfo(validationResult);
                 this.props.onContinue(this.state.copy, validationResult);
             }
         }
     };
+
+    updateStateInfo = (validationResult) => {
+        if(!validationResult.errorOccurred) {
+            this.setState({
+                ...this.state,
+                info: {
+                    ...this.state.copy
+                }
+            })
+        }
+    }
 
     onSettingsClick = () => {
         this.setState({
@@ -102,16 +105,8 @@ class goalResults extends Component {
         if(isEqual(this.state.info,this.state.copy)) {
             return;
         } else {
-            //TODO: should be located in function
             let validationResult = validateGoalsInput(this.state.copy);
-            if(!validationResult.errorOccurred) {
-                this.setState({
-                    ...this.state,
-                    info: {
-                        ...this.state.copy
-                    }
-                })
-            }
+            this.updateStateInfo(validationResult)
             this.props.onContinue(this.state.copy, validationResult);
         }
     };
@@ -119,7 +114,7 @@ class goalResults extends Component {
     handleSettings = () => {
         return !this.state.settingsCollapsed && (
         <div className="row">
-            <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data={ this.state.copy }/>
+            <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.copy }/>
         </div>
         )
     };

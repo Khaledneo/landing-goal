@@ -11,10 +11,10 @@ class goalInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                age: "18",
-                reason: "education",
-                horizon: "5",
-                amount: "5555"
+            age: "18",
+            reason: "education",
+            horizon: "5",
+            amount: "5555"
         };
     };
 
