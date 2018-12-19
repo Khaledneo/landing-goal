@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import { goalResults as GoalResults } from '../recommendation/goal-result';
 import { goalInput as GoalInput } from "../goal/goal-input";
+import { cashOption } from "../../constants/variables";
 import Aux from "../../Hoc/Aux";
 import axios from "axios";
 import './goal-box.scss';
@@ -124,6 +125,7 @@ class goalBox extends Component {
         this.state =  {
             errorMessage: "",
             result: dummyData,
+            risks: [],
             info: {
               age: "18",
               reason: "education",
@@ -156,12 +158,32 @@ class goalBox extends Component {
         }
     };
 
+    componentDidMount(){
+      this.fetchRiskScore();
+    }
 
+    fillCash(data) {
+      for (let i = 0; i < data.length; i++) {
+        data[i].groups.push(cashOption);
+      }
+      return data;
+    }
+
+    async fetchRiskScore() {
+      try {
+        let response = await axios.get("/scores/raa/info/all");
+        this.setState({
+          risks: this.fillCash(response.data.list)
+        });
+      } catch (exception) {
+        console.log(JSON.stringify(exception, null, 2));
+      }
+    }
 
     handleView = () => {
         let length = this.state.result.length;
         return length ?
-         <GoalResults data = {this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} info={this.state.info}/> :
+         <GoalResults data = {this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} risks={this.state.risks} info={this.state.info}/> :
          <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
     };
 
@@ -179,7 +201,7 @@ class goalBox extends Component {
                 <div className="container">
                     <div id="box">
                         <ErrorModal errorMessage={this.state.errorMessage}/>
-                        { this.handleView() }
+                        { this.state.risks.length ? this.handleView() : "Loading..." }
                     </div>
                 </div>
             </Aux>

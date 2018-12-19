@@ -5,6 +5,7 @@ import { noteBox as NoteBox } from "../../components/note/noteBox";
 import { settingsInput as SettingsInput } from "../../components/settings/input";
 import "./goal-result.scss";
 import { isEqual,validateGoalsInput } from "../../util/util";
+import {assetsAllocation as AssetsAllocation} from "../../components/assetsAllocation/assetsAllocation";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
 import yearlyImage from "../../assets/images/yearly.jpg";
@@ -112,10 +113,14 @@ class goalResults extends Component {
     };
 
     handleSettings = () => {
+        const activeRisk = this.props.risks.find(risk => risk.risk.score === 7);
         return !this.state.settingsCollapsed && (
-        <div className="row">
-            <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.copy }/>
-        </div>
+        <Aux>
+            <div className="row settings-input">
+                <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.copy }/>
+            </div>
+            <AssetsAllocation groups={activeRisk.groups} projections={activeRisk && activeRisk.projections}/>
+        </Aux>
         )
     };
 
