@@ -20,125 +20,10 @@ class goalBox extends Component {
 
     constructor(props) {
       super(props);
-        // const dummyData = 
-        //     [
-        //       {
-        //         "name": "Quarterly",
-        //         "frequency": 4,
-        //         "isCollapsed": true,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -68,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5003
-        //           ],
-        //           [
-        //             "2",
-        //             5006
-        //           ],
-        //           [
-        //             "3",
-        //             5010
-        //           ],
-        //           [
-        //             "4",
-        //             5013
-        //           ],
-        //           [
-        //             "5",
-        //             5017
-        //           ]
-        //         ]
-        //       },
-        //       {
-        //         "name": "Semi-annual",
-        //         "frequency": 2,
-        //         "isCollapsed": true,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -135,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5005
-        //           ],
-        //           [
-        //             "2",
-        //             5010
-        //           ],
-        //           [
-        //             "3",
-        //             5016
-        //           ],
-        //           [
-        //             "4",
-        //             5022
-        //           ],
-        //           [
-        //             "5",
-        //             5028
-        //           ]
-        //         ]
-        //       },
-        //       {
-        //         "name": "Yearly",
-        //         "frequency": 1,
-        //         "isCollapsed": true,
-        //         "initial_investment": 5000,
-        //         "recurring_investment": -270,
-        //         "horizon": 5,
-        //         "is_valid": false,
-        //         "future_values": [
-        //           [
-        //             "0",
-        //             5000
-        //           ],
-        //           [
-        //             "1",
-        //             5005
-        //           ],
-        //           [
-        //             "2",
-        //             5010
-        //           ],
-        //           [
-        //             "3",
-        //             5016
-        //           ],
-        //           [
-        //             "4",
-        //             5022
-        //           ],
-        //           [
-        //             "5",
-        //             5028
-        //           ]
-        //         ]
-        //       }
-        //     ]
-         
         this.state =  {
             recommendationsResult: [],
             risks: [],
-            inputs: {
-              // age: "18",
-              // reason: "education",
-              // horizon: "5",
-              // amount: "5555",
-              // initial_investment: "0"
-            }
+            inputs: {}
         };
     };
 
@@ -221,12 +106,12 @@ class goalBox extends Component {
       const content = this.renderContent();
       return (
         <Aux>
-                <div className="container">
-                    <div id="box">
-                        { content }
-                    </div>
-                </div>
-          </Aux>
+          <div className="container">
+            <div id="box">
+              { content }
+            </div>
+          </div>
+        </Aux>
         )
     };
 

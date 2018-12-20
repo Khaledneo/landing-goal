@@ -30,6 +30,8 @@ class goalResults extends Component {
         };
         this.state= {
             ...this.state,
+            amount: props.inputs.amount,
+            horizon: props.inputs.horizon,
             inputs: {
                 ...props.inputs
             },
@@ -104,30 +106,45 @@ class goalResults extends Component {
         if(validationResult.errorOccurred) {
             this.openModalError(validationResult.errorMessage);
         } else {
+            this.setState({
+                ...this.state,
+                amount: this.state.inputs.amount,
+                horizon: this.state.horizon
+            })
             this.fetchResult();
         }
     };
 
 
-    async fetchResult  ()  {
-        const {initial_investment , amount, horizon } = this.state.inputs;  
+    async fetchResult() {
+        const {
+            initial_investment,
+            amount,
+            horizon
+        } = this.state.inputs;
 
         try {
             let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
-            let updatedData = response.data.map(plan => {
-                return {
-                    ...plan,
-                    isCollapsed: true
-                }
-            });
+            let recommendationsResult = this.fillCollapsed(response.data)
             this.setState({
-                 ...this.state,
-                 recommendations: updatedData,
-              });
-          } catch(exception) {
-              console.log(JSON.stringify(exception,null,2));
-          }
-      };
+                ...this.state,
+                recommendations: recommendationsResult,
+            });
+        } catch (exception) {
+            console.log(JSON.stringify(exception, null, 2));
+        }
+
+    };
+
+    fillCollapsed = (recommendations) => {
+        return recommendations.map(plan => {
+            return {
+                ...plan,
+                isCollapsed: true
+            }
+        });
+    };
+
 
     openModalError = (errorMessage) => {
         this.setState({
@@ -166,7 +183,7 @@ class goalResults extends Component {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.state.inputs.amount} in {this.state.inputs.horizon} {" "}
+                    <p className="result-title">In order for you to reach your goal of ${this.state.amount} in {this.state.horizon} {" "}
                          years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.plans }
