@@ -2,6 +2,8 @@ import React from "react";
 import Aux from "../../Hoc/Aux";
 import config from "../../constants/chartConfig";
 import AmCharts from "@amcharts/amcharts3-react";
+import { addCommaToNumber, renderErrorMessage } from "../../util/util";
+
 
 import "./plan.scss";
 
@@ -66,7 +68,7 @@ export const plan = (props) => {
                     <div className="data">
                         <div className="custom-row">
                             <span>Initial Investment</span>
-                            <span>{props.planData.initial_investment}</span>
+                            <span>${addCommaToNumber(parseInt(props.planData.initial_investment))}</span>
                         </div>
                         <div className="custom-row">
                             <span>{props.planData.name} Deposit</span>
@@ -84,9 +86,12 @@ export const plan = (props) => {
                     <div className="chart">
                         <div className="chart-title">
                             <h3>Future You</h3>
-                            <span><span>Goal</span> ${props.amount}</span>
+                            <span><span>Goal</span> ${addCommaToNumber(props.amount)}</span>
                         </div>
                         { getChart(props.planData.future_values) }
+                    </div>
+                    <div className="errorMessage">
+                        { renderErrorMessage(props.planData.initial_investment, props.planData.recurring_investment) }
                     </div>
                 </div>
             </div>

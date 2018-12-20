@@ -4,7 +4,7 @@ import Aux from "../../Hoc/Aux";
 import { noteBox as NoteBox } from "../../components/note/noteBox";
 import { settingsInput as SettingsInput } from "../../components/settings/input";
 import "./goal-result.scss";
-import { validateGoalsInput } from "../../util/util";
+import { validateGoalsInput, addCommaToNumber } from "../../util/util";
 import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import {assetsAllocation as AssetsAllocation} from "../../components/assetsAllocation/assetsAllocation";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
@@ -180,10 +180,11 @@ class goalResults extends Component {
     };
 
     render () {
+        console.log(JSON.stringify(this.state.recommendations,null,2));
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.state.amount} in {this.state.horizon} {" "}
+                    <p className="result-title">In order for you to reach your goal of ${addCommaToNumber(this.state.amount)} in {this.state.horizon} {" "}
                          years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.plans }
