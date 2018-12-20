@@ -20,8 +20,13 @@
         font-size: 21px;
         font-weight: bold;
     }
+    .plan-header {
+        padding:24px;
+        padding-bottom: 0;
+    }
     .data {
         padding: 24px;
+        padding-top: 0;
         padding-bottom: 0;
         div.custom-row {
             font-size: 14px;
@@ -45,6 +50,9 @@
             }
         }
     }
+    .collapsed {
+        display: block;
+    }
     .chart {
         margin-top: 24px;
         margin-bottom: 24px;
@@ -62,6 +70,7 @@
         }
     }
     .read-more {
+        display: none;
         background-color: transparent;
         border: none;
         color: #0076ff;
@@ -95,6 +104,15 @@
     }
 }
 @media (max-width: 767px) {
+    .plan-header {
+        padding-bottom: 24px !important;
+    }
+    .collapsed {
+        display: none !important;
+    }
+    .read-more {
+        display: block !important;
+    }
     .plan-image {
         display: none;
     }

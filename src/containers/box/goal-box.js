@@ -20,6 +20,7 @@ class goalBox extends Component {
               {
                 "name": "Quarterly",
                 "frequency": 4,
+                "isCollapsed": true,
                 "initial_investment": 5000,
                 "recurring_investment": -68,
                 "horizon": 5,
@@ -54,6 +55,7 @@ class goalBox extends Component {
               {
                 "name": "Semi-annual",
                 "frequency": 2,
+                "isCollapsed": true,
                 "initial_investment": 5000,
                 "recurring_investment": -135,
                 "horizon": 5,
@@ -88,6 +90,7 @@ class goalBox extends Component {
               {
                 "name": "Yearly",
                 "frequency": 1,
+                "isCollapsed": true,
                 "initial_investment": 5000,
                 "recurring_investment": -270,
                 "horizon": 5,
@@ -141,8 +144,14 @@ class goalBox extends Component {
     async fetchResult  (amount,horizon,initial_investment)  {
       try {
           let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
+          let updatedData = response.data.map(plan => {
+            return {
+                ...plan,
+                isCollapsed: true
+            }
+          });
           this.setState({
-                result: response.data,
+                result: updatedData,
                 info: {
                   ...this.state.info,
                   initial_investment: initial_investment,

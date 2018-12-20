@@ -50,33 +50,38 @@ export const plan = (props) => {
     const bakgroundImage = {
         backgroundImage: `url(${props.planData.image})`
     };
+    console.log(props.planData.isCollapsed);
     return (
         <Aux>
             <div className="plan">
                 <div className="plan-image" style={bakgroundImage}></div>
-                <div className="data">
+                <div className="plan-header">
                     <h3>{props.planData.name} Deposit</h3>
-                    <button className="read-more">
-                        Read more
+                    <button className="read-more" onClick={ () => {props.onChangeView(props.planData.name)} }>
+                        View more
                         <div className="down-arrow"></div>
                     </button>
-                    <div className="custom-row">
-                        <span>Initial Investment</span>
-                        <span>{props.planData.initial_investment}</span>
-                    </div>
-                    <div className="custom-row">
-                        <span>{props.planData.name} Deposit</span>
-                        <span>${props.planData.recurring_investment}</span>
-                    </div>
-                    <div className="custom-row">
-                        <span>Investment Horizon</span>
-                        <span>{props.planData.horizon} Years</span>
-                    </div>
-                    <div className="custom-row">
-                        <span>Risk Tolerance</span>
-                        <span>Balanced (7/10)</span>
-                    </div>
                 </div>
+
+                <div className={ props.planData.isCollapsed ? "plan-content collapsed" : "plan-content" }>
+                    <div className="data">
+                        <div className="custom-row">
+                            <span>Initial Investment</span>
+                            <span>{props.planData.initial_investment}</span>
+                        </div>
+                        <div className="custom-row">
+                            <span>{props.planData.name} Deposit</span>
+                            <span>${props.planData.recurring_investment}</span>
+                        </div>
+                        <div className="custom-row">
+                            <span>Investment Horizon</span>
+                            <span>{props.planData.horizon} Years</span>
+                        </div>
+                        <div className="custom-row">
+                            <span>Risk Tolerance</span>
+                            <span>Balanced (7/10)</span>
+                        </div>
+                    </div>
                     <div className="chart">
                         <div className="chart-title">
                             <h3>Future You</h3>
@@ -84,6 +89,7 @@ export const plan = (props) => {
                         </div>
                         { getChart(props.planData.future_values) }
                     </div>
+                </div>
             </div>
         </Aux>
     )

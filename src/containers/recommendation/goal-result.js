@@ -61,10 +61,20 @@ class goalResults extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan} amount={this.state.inputs.amount} />
+                    <Plan onChangeView={ (planKey) => { this.handlePlanDisplay(planKey) } }  planData={plan} amount={this.state.inputs.amount} />
                 </div>
             )
         })
+    };
+
+    handlePlanDisplay = (planKey) => {
+       let changedPlanIndex = this.state.recommendations.findIndex(plan => plan.name === planKey);
+       let recommendations = this.state.recommendations;
+       recommendations[changedPlanIndex].isCollapsed = !recommendations[changedPlanIndex].isCollapsed;
+       this.setState({
+           ...this.state,
+           recommendations: recommendations
+       });
     };
 
     changeValue = (e) => {
@@ -105,9 +115,15 @@ class goalResults extends Component {
         const horizon = this.state.inputs.horizon;
         try {
             let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
+            let updatedData = response.data.map(plan => {
+                return {
+                    ...plan,
+                    isCollapsed: true
+                }
+            });
             this.setState({
                  ...this.state,
-                 recommendations: response.data,
+                 recommendations: updatedData,
               });
           } catch(exception) {
               console.log(JSON.stringify(exception,null,2));
