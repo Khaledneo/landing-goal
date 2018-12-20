@@ -68,12 +68,12 @@ class goalResults extends Component {
     };
 
     handlePlanDisplay = (planKey) => {
-       let changedPlanIndex = this.state.recommendations.findIndex(plan => plan.name === planKey);
-       let recommendations = this.state.recommendations;
+       let {recommendations} = this.state;  
+       let changedPlanIndex = recommendations.findIndex(plan => plan.name === planKey);
        recommendations[changedPlanIndex].isCollapsed = !recommendations[changedPlanIndex].isCollapsed;
        this.setState({
            ...this.state,
-           recommendations: recommendations
+           recommendations
        });
     };
 
@@ -110,9 +110,8 @@ class goalResults extends Component {
 
 
     async fetchResult  ()  {
-        const initial_investment = this.state.inputs.initial_investment;
-        const amount = this.state.inputs.amount;
-        const horizon = this.state.inputs.horizon;
+        const {initial_investment , amount, horizon } = this.state.inputs;  
+
         try {
             let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
             let updatedData = response.data.map(plan => {

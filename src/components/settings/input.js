@@ -14,11 +14,11 @@ const settingsInput = (props) => {
                     Target saving
                 </label>
                 <MaskedInput
+                onChange={props.onChange}
                 value={props.data.amount}
                 mask={dollarNumberMask}
                 onKeyPress={props.onChange}
                 onBlur={props.onBlur}
-                onChange={props.onChange}
                 type="text"
                 name="amount"
                 />
@@ -33,8 +33,8 @@ const settingsInput = (props) => {
                 name="horizon"
                 value={props.data.horizon}
                 onBlur={props.onBlur}
-                onKeyPress={props.onChange}
                 onChange={props.onChange}
+                onKeyPress={props.onChange}
                 placeholder="35 years"/>  
             </div>
             <div className=" settings-inputs col-6 col-md-2">

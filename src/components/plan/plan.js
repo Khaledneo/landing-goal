@@ -50,7 +50,6 @@ export const plan = (props) => {
     const bakgroundImage = {
         backgroundImage: `url(${props.planData.image})`
     };
-    console.log(props.planData.isCollapsed);
     return (
         <Aux>
             <div className="plan">

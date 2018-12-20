@@ -13,21 +13,15 @@ class goalInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            age: "18",
-            reason: "education",
-            horizon: "5",
-            amount: "5555"
+            age: "",
+            reason: "",
+            horizon: "",
+            amount: "",
+            initial_investment: "0"
         };
     };
 
-    changeValue = (e) => {
-        const inputName = e.target.name;
-        const inputValue = inputName !== "reason" ? inputName !== "amount" ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, "")) : e.target.value;
-        this.setState({
-            ...this.state,
-            [inputName]: inputName !== "reason" ? !isNaN(inputValue) ? inputValue : "" : inputValue
-        });
-    };
+
 
     validateInput = () => {
         let validationResult = validateGoalsInput(this.state);
@@ -44,6 +38,28 @@ class goalInput extends Component {
           errorMessage: errorMessage
       });
       $("#errorModal").modal("show");
+    };
+
+    changeValue = (e) => {
+        const inputName = e.target.name;
+        let inputValue = null;
+        switch(inputName){
+            case "reason":
+            inputValue = e.target.value;
+            break;
+            case "amount":
+            inputValue =  parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, ""));
+            if(isNaN(inputValue)) {
+                inputValue = "";
+            } 
+            break;
+            default: 
+            inputValue = parseInt(e.target.value);
+        }
+        this.setState({
+            ...this.state,
+            [inputName]:  inputValue
+        });
     };
 
     render() {
