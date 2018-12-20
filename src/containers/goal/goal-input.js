@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Aux from "../../Hoc/Aux";
 import { validateGoalsInput } from "../../util/util";
 import {boxHeader as BoxHeader} from "../../components/box-header/box-header";
+import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import {information as Information} from "../../components/information/information";
+const $ = window.$;
 
 
 
@@ -29,9 +31,20 @@ class goalInput extends Component {
 
     validateInput = () => {
         let validationResult = validateGoalsInput(this.state);
-        this.props.onContinue(this.state, validationResult);
+        if(validationResult.errorOccurred) {
+            this.openModalError(validationResult.errorMessage);
+        } else {
+            this.props.onContinue(this.state);
+        }
     };
 
+    openModalError = (errorMessage) => {
+      this.setState({
+          ...this.state,
+          errorMessage: errorMessage
+      });
+      $("#errorModal").modal("show");
+    };
 
     render() {
         return (
@@ -40,9 +53,9 @@ class goalInput extends Component {
                 <Information
                     userInformation={this.state}
                     onValueChange={this.changeValue}
-                    /> 
+                    />
+                 <ErrorModal errorMessage={this.state.errorMessage}/>
                 <div className="button-group">
-                    <button className="btn rounded-0 light">Back</button>
                     <button className="btn rounded-0 primary" onClick={this.validateInput}>Continue</button>
                 </div>
             </Aux>

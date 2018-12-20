@@ -17,21 +17,17 @@ class goalResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            settingsCollapsed: false,
-            info: {
-                age: this.props.info.age,
-                reason: this.props.info.reason,
-                horizon: this.props.info.horizon,
-                amount: this.props.info.amount,
-                initial_investment: this.props.info.initial_investment
+            isSettingsCollapsed: false,
+            isLoading: false
+        };
+        this.state= {
+            ...this.state,
+            inputs: {
+                ...props.inputs
             },
-            copy: {
-                age: this.props.info.age,
-                reason: this.props.info.reason,
-                horizon: this.props.info.horizon,
-                amount: this.props.info.amount,
-                initial_investment: this.props.info.initial_investment
-            }
+            recommendations: [
+                ...props.data
+            ] 
         };
     }
 
@@ -47,7 +43,7 @@ class goalResults extends Component {
     }];
 
     get plans() {
-        let plans = this.props.data.map(plan => {
+        let plans = this.state.recommendations.map(plan => {
             let image = this.plansImages.find(p => p.name === plan.name).image;
             return {
                 ...plan,
@@ -57,7 +53,7 @@ class goalResults extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan} target={this.props.info.amount}/>
+                    <Plan  planData={plan} amount={this.state.inputs.amount}/>
                 </div>
             )
         })
@@ -98,7 +94,7 @@ class goalResults extends Component {
 
     onSettingsClick = () => {
         this.setState({
-            settingsCollapsed: !this.state.settingsCollapsed
+            isSettingsCollapsed: !this.state.isSettingsCollapsed
         });
     };
 
@@ -114,10 +110,10 @@ class goalResults extends Component {
 
     handleSettings = () => {
         const activeRisk = this.props.risks.find(risk => risk.risk.score === 7);
-        return !this.state.settingsCollapsed && (
+        return !this.state.isSettingsCollapsed && (
         <Aux>
             <div className="row settings-input">
-                <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.copy }/>
+                <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.inputs }/>
             </div>
             <AssetsAllocation groups={activeRisk.groups} projections={activeRisk && activeRisk.projections}/>
         </Aux>
@@ -128,7 +124,7 @@ class goalResults extends Component {
         return (
             <Aux>
                 <div className="recommendation">
-                    <p className="result-title">In order for you to reach your goal of ${this.props.info.amount} in {this.props.info.horizon} {" "}
+                    <p className="result-title">In order for you to reach your goal of ${this.state.inputs.amount} in {this.state.inputs.horizon} {" "}
                          years, we recommend you follow one of the below plans:</p>
                     <div className="row">
                         { this.plans }
@@ -140,7 +136,7 @@ class goalResults extends Component {
                     </div>
                     <div className="advanced-settings">
                         <div className="settings-header">
-                            <button onClick={ this.onSettingsClick }>Advanced Settings <div className={ this.state.settingsCollapsed ? "down-arrow" : "up-arrow" }></div>
+                            <button onClick={ this.onSettingsClick }>Advanced Settings <div className={ this.state.isSettingsCollapsed ? "down-arrow" : "up-arrow" }></div>
                             </button>
                             <span>
                                 Amend your goals and options

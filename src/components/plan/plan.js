@@ -76,7 +76,7 @@ export const plan = (props) => {
                     <div className="chart">
                         <div className="chart-title">
                             <h3>Future You</h3>
-                            <span><span>Goal</span> ${props.target}</span>
+                            <span><span>Goal</span> ${props.amount}</span>
                         </div>
                         { getChart(props.planData.future_values) }
                     </div>

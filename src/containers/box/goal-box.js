@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import { goalResults as GoalResults } from '../recommendation/goal-result';
 import { goalInput as GoalInput } from "../goal/goal-input";
 import { cashOption } from "../../constants/variables";
-import Aux from "../../Hoc/Aux";
 import axios from "axios";
+import Aux from "../../Hoc/Aux";
 import './goal-box.scss';
 
 
@@ -123,10 +122,9 @@ class goalBox extends Component {
             ]
          
         this.state =  {
-            errorMessage: "",
             result: dummyData,
             risks: [],
-            info: {
+            inputs: {
               age: "18",
               reason: "education",
               horizon: "5",
@@ -136,16 +134,15 @@ class goalBox extends Component {
         };
     };
 
-    handleContinue = (userInput, validationResult ) =>  {
-      validationResult.errorOccurred ? this.openModalError(validationResult.errorMessage) : this.fetchResult(userInput.amount,userInput.horizon,0)
+    handleContinue = (userInput) =>  {
+      this.fetchResult(userInput.amount,userInput.horizon,0);
     };
 
     async fetchResult  (amount,horizon,initial_investment)  {
       try {
-          let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`); 
+          let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
           this.setState({
                 result: response.data,
-                errorMessage: "",
                 info: {
                   ...this.state.info,
                   initial_investment: initial_investment,
@@ -183,24 +180,17 @@ class goalBox extends Component {
     handleView = () => {
         let length = this.state.result.length;
         return length ?
-         <GoalResults data = {this.state.result} onContinue={ (info, validationResult) => { this.handleContinue(info, validationResult) }} risks={this.state.risks} info={this.state.info}/> :
-         <GoalInput  onContinue={ (info, validationResult)=>{ this.handleContinue(info,validationResult) } }/>;
+         <GoalResults data = {this.state.result} risks={this.state.risks} inputs={this.state.inputs}/> :
+         <GoalInput  onContinue={ (info)=>{ this.handleContinue(info) } }/>;
     };
 
-    openModalError = (errorMessage) => {
-      this.setState({
-          ...this.state,
-          errorMessage: errorMessage
-      });
-      $("#errorModal").modal("show");
-    };
+
 
     render() {
         return (
             <Aux>
                 <div className="container">
                     <div id="box">
-                        <ErrorModal errorMessage={this.state.errorMessage}/>
                         { this.state.risks.length ? this.handleView() : "Loading..." }
                     </div>
                 </div>
