@@ -9,8 +9,18 @@ $black: #333333;
         color: $black;
         font-size: 26px;
     }
+    // .down-arrow {
+    //     display: inline-block;
+    //     width: 0; 
+    //     height: 0; 
+    //     border-left: 8px solid transparent;
+    //     border-right: 8px solid transparent;
+    //     border-top: 8px solid #333333;
+    // }
     input {
+
         border: none !important;
+        padding-bottom: 5px;
         line-height: .5;
         background-image: none !important;
         background-color: transparent !important;
@@ -39,6 +49,9 @@ $black: #333333;
         }
     }
     .selectpicker {
+        -webkit-appearance:none;
+        appearance: none;
+        border-radius: 0;
         outline: none;
         background-color: transparent;
         border: none;

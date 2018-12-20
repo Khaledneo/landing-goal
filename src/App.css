@@ -1,7 +1,15 @@
+@font-face {
+  font-family: "San Francisco Regular";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/assets/fonts/Regular/SanFranciscoDisplay-Regular.ttf") format("truetype");
+};
+
 #main {
   background-color: #fafafa;
 }
 .App {
+  font-family: "San Francisco Regular";
   text-align: center;
 }
 
