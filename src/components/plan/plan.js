@@ -56,6 +56,10 @@ export const plan = (props) => {
                 <div className="plan-image" style={bakgroundImage}></div>
                 <div className="data">
                     <h3>{props.planData.name} Deposit</h3>
+                    <button className="read-more">
+                        Read more
+                        <div className="down-arrow"></div>
+                    </button>
                     <div className="custom-row">
                         <span>Initial Investment</span>
                         <span>{props.planData.initial_investment}</span>

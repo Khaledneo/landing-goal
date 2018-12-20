@@ -61,6 +61,38 @@
             }
         }
     }
+    .read-more {
+        background-color: transparent;
+        border: none;
+        color: #0076ff;
+        font-size: 13px;
+        outline: none;
+        cursor: pointer;
+        padding-left: 0;
+        &:focus {
+            outline: none;
+        }
+        div {
+            margin-left: 5px;
+            margin-bottom: 2px;
+        }
+        .down-arrow {
+            display: inline-block;
+            width: 0; 
+            height: 0; 
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #333333;
+        }
+        .up-arrow {
+            display: inline-block;
+            width: 0; 
+            height: 0; 
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid #333333; 
+        }
+    }
 }
 @media (max-width: 767px) {
     .plan-image {
