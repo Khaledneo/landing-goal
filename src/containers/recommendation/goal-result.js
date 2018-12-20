@@ -6,6 +6,7 @@ import { settingsInput as SettingsInput } from "../../components/settings/input"
 import "./goal-result.scss";
 import { validateGoalsInput, addCommaToNumber } from "../../util/util";
 import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
+import {loader as Loader} from "../../components/loader/loader";
 import {assetsAllocation as AssetsAllocation} from "../../components/assetsAllocation/assetsAllocation";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
@@ -124,15 +125,21 @@ class goalResults extends Component {
         } = this.state.inputs;
 
         try {
+            this.setState({
+                isLoading: true
+            });
             let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
             let recommendationsResult = this.fillCollapsed(response.data)
             this.setState({
                 ...this.state,
+                isLoading: false,
                 recommendations: recommendationsResult,
             });
+            console.log(this.state.isLoading);
         } catch (exception) {
             console.log(JSON.stringify(exception, null, 2));
         }
+
 
     };
 
@@ -179,10 +186,16 @@ class goalResults extends Component {
         $("#alloccatioModal").modal("show");
     };
 
+    handleLoading = () => {
+        this.state.isLoading ? $("#loader").modal("show") : $("#loader").modal("hide"); 
+    };
+
     render () {
-        console.log(JSON.stringify(this.state.recommendations,null,2));
+        const loading = this.handleLoading();
         return (
             <Aux>
+                {loading}
+                <Loader />
                 <div className="recommendation">
                     <p className="result-title">In order for you to reach your goal of ${addCommaToNumber(this.state.amount)} in {this.state.horizon} {" "}
                          years, we recommend you follow one of the below plans:</p>

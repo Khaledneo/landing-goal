@@ -3,7 +3,6 @@ import { Line } from 'rc-progress';
 import "./assetsAllocation.scss";
 import IconInfo from "../../assets/icons/icon-info.png"
 import Aux from "../../Hoc/Aux";
-const $ = window.$;
 
 
 
@@ -27,14 +26,14 @@ const getGroups = (groups,onAssetsClick) => {
             case 4:
             color = "#ffcc00";
               break;
-            case 5:
+            default:
             color = "#ff9500";
         };
         let percentage = (group.percentage * 100).toFixed(1);
         return (
             <div key={group.name} className="group-progress" onClick={()=>onAssetsClick(group)}> 
                     <div className="allocationName">
-                        <div className="label">{group.description} <img src={IconInfo} /> </div>
+                        <div className="label">{group.description} <img src={IconInfo} alt={"info"}/> </div>
                         <div className="percentage">{percentage}%</div>
                     </div>
                     <Line percent={percentage} strokeWidth="1" strokeColor={color} />

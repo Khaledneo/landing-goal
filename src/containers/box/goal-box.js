@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { goalResults as GoalResults } from '../recommendation/goal-result';
 import { goalInput as GoalInput } from "../goal/goal-input";
+import {loader as Loader} from "../../components/loader/loader";
 import { cashOption } from "../../constants/variables";
 import axios from "axios";
 import Aux from "../../Hoc/Aux";
 import './goal-box.scss';
 
-
-
 const $ = window.$;
+
+
 
 
 class goalBox extends Component {
@@ -90,9 +91,6 @@ class goalBox extends Component {
     };
 
     renderContent(){
-      if(this.state.isLoadingRiskScore || this.state.isLoadingRecommendations){
-        return (<div>Loading</div>);
-      }
       if(!Object.keys(this.state.inputs).length){
       return  <GoalInput  onContinue={(inputs)=>{ this.handleContinue(inputs)}}/>
       }
@@ -101,11 +99,17 @@ class goalBox extends Component {
       }
       return null;
     }
-    
+
+    handleLoading = () => {
+      (this.state.isLoadingRiskScore || this.state.isLoadingRecommendations) ? $("#loader").modal("show") : $("#loader").modal("hide"); 
+    };
+
     render() {
       const content = this.renderContent();
+      const loadeing = this.handleLoading();
       return (
         <Aux>
+          <Loader />
           <div className="container">
             <div id="box">
               { content }
