@@ -1,4 +1,11 @@
 .modal {
+    .close {
+        span {
+            font-size: 32px;
+            color: #96a4b6;
+            font-weight: lighter;
+        }
+    }
     .modal-content {
         padding: 40px;
     }
