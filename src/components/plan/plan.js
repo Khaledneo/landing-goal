@@ -59,8 +59,8 @@ export const plan = (props) => {
                 <div className="plan-header">
                     <h3>{props.planData.name} Deposit</h3>
                     <button className="read-more" onClick={ () => {props.onChangeView(props.planData.name)} }>
-                        View more
-                        <div className="down-arrow"></div>
+                        View {props.planData.isCollapsed ? "more" : "less"}
+                        <div className={props.planData.isCollapsed ? "down-arrow" : "up-arrow"}></div>
                     </button>
                 </div>
 
