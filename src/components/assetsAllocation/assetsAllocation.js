@@ -1,10 +1,14 @@
 import React from "react";
 import { Line } from 'rc-progress';
 import "./assetsAllocation.scss";
+import IconInfo from "../../assets/icons/icon-info.png"
 import Aux from "../../Hoc/Aux";
+const $ = window.$;
 
 
-const getGroups = (groups) => {
+
+
+const getGroups = (groups,onAssetsClick) => {
     return groups.map((group,index) => {
         let color;
         switch (index) {
@@ -28,23 +32,24 @@ const getGroups = (groups) => {
         };
         let percentage = (group.percentage * 100).toFixed(1);
         return (
-            <div key={group.name} className="group-progress">
-                <div className="allocationName">
-                    <div className="label">{group.description}</div>
-                    <div className="percentage">{percentage}%</div>
-                </div>
-                <Line percent={percentage} strokeWidth="1" strokeColor={color} />
+            <div key={group.name} className="group-progress" onClick={()=>onAssetsClick(group)}> 
+                    <div className="allocationName">
+                        <div className="label">{group.description} <img src={IconInfo} /> </div>
+                        <div className="percentage">{percentage}%</div>
+                    </div>
+                    <Line percent={percentage} strokeWidth="1" strokeColor={color} />
             </div>
         )
     });
 };
 
 export const assetsAllocation = (props) => {
-    const groups = getGroups(props.groups);
+    const groups = getGroups(props.groups,props.onAssetsClick);
     return (    
         <Aux>
+
             <div className="allocationName titles">
-                    <div className="label">Assets</div>
+                    <div className="label assets">Assets Class</div>
                     <div className="percentage">Allocation</div>
             </div>
             { groups }

@@ -1,11 +1,24 @@
 .allocationName {
     &.titles{
         margin-bottom: 10px;
+        * {
+            color: #96a4b6
+        }
     }
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    line-height: 1.25;
+    color: #1a375f;
     * {
         color: #1a375f;
     }
+    img {
+        width: 25px;
+        height: auto;
+    };
+}
+.group-progress {
+    cursor: pointer;
+    margin-top: 10px;
 }

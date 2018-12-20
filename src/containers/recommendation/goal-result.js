@@ -4,11 +4,16 @@ import Aux from "../../Hoc/Aux";
 import { noteBox as NoteBox } from "../../components/note/noteBox";
 import { settingsInput as SettingsInput } from "../../components/settings/input";
 import "./goal-result.scss";
-import { isEqual,validateGoalsInput } from "../../util/util";
+import { validateGoalsInput } from "../../util/util";
+import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import {assetsAllocation as AssetsAllocation} from "../../components/assetsAllocation/assetsAllocation";
 import quarterlyImage from "../../assets/images/quarterly.jpg";
 import semiAnnualImage from "../../assets/images/semi-annual.jpg";
+import axios from "axios";
 import yearlyImage from "../../assets/images/yearly.jpg";
+import { allocationModal as AllocationModal} from "../../components/allocationModal/allocationModal";
+
+const $ = window.$;
 
 
 class goalResults extends Component {
@@ -17,8 +22,11 @@ class goalResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            errorMessage: "",
             isSettingsCollapsed: false,
-            isLoading: false
+            isLoading: false,
+            activeGroup: {},
+            activeProjection: {}
         };
         this.state= {
             ...this.state,
@@ -53,7 +61,7 @@ class goalResults extends Component {
         return plans.map(plan => {
             return (
                 <div key={plan.name} className="col-lg-4">
-                    <Plan  planData={plan} amount={this.state.inputs.amount}/>
+                    <Plan  planData={plan} amount={this.state.inputs.amount} />
                 </div>
             )
         })
@@ -65,32 +73,15 @@ class goalResults extends Component {
             const inputValue = inputName !== "reason" ? ((inputName !== "amount" && inputName !== "initial_investment") ? parseInt(e.target.value) : parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, ""))) : e.target.value;
             this.setState({
                 ...this.state,
-                copy: {
-                    ...this.state.copy,
+                inputs: {
+                    ...this.state.inputs,
                     [inputName]: inputName !== "reason" ? !isNaN(inputValue) ? inputValue : "" : inputValue
                 }
             });
         } else {
-            if(isEqual(this.state.info,this.state.copy)) {
-                return;
-            } else {
-                let validationResult = validateGoalsInput(this.state.copy);
-                this.updateStateInfo(validationResult);
-                this.props.onContinue(this.state.copy, validationResult);
-            }
+            this.handleBlur();
         }
     };
-
-    updateStateInfo = (validationResult) => {
-        if(!validationResult.errorOccurred) {
-            this.setState({
-                ...this.state,
-                info: {
-                    ...this.state.copy
-                }
-            })
-        }
-    }
 
     onSettingsClick = () => {
         this.setState({
@@ -99,13 +90,36 @@ class goalResults extends Component {
     };
 
     handleBlur = () => {
-        if(isEqual(this.state.info,this.state.copy)) {
-            return;
+        let validationResult = validateGoalsInput(this.state.inputs);
+        if(validationResult.errorOccurred) {
+            this.openModalError(validationResult.errorMessage);
         } else {
-            let validationResult = validateGoalsInput(this.state.copy);
-            this.updateStateInfo(validationResult)
-            this.props.onContinue(this.state.copy, validationResult);
+            this.fetchResult();
         }
+    };
+
+
+    async fetchResult  ()  {
+        const initial_investment = this.state.inputs.initial_investment;
+        const amount = this.state.inputs.amount;
+        const horizon = this.state.inputs.horizon;
+        try {
+            let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
+            this.setState({
+                 ...this.state,
+                 recommendations: response.data,
+              });
+          } catch(exception) {
+              console.log(JSON.stringify(exception,null,2));
+          }
+      };
+
+    openModalError = (errorMessage) => {
+        this.setState({
+            ...this.state,
+            errorMessage: errorMessage
+        });
+        $("#errorModal").modal("show");
     };
 
     handleSettings = () => {
@@ -113,11 +127,24 @@ class goalResults extends Component {
         return !this.state.isSettingsCollapsed && (
         <Aux>
             <div className="row settings-input">
-                <SettingsInput onBlur={ this.handleBlur }  onChange={this.changeValue} data = { this.state.inputs }/>
+                <SettingsInput onBlur={this.handleBlur}  onChange={this.changeValue} data={this.state.inputs}/>
             </div>
-            <AssetsAllocation groups={activeRisk.groups} projections={activeRisk && activeRisk.projections}/>
+            <AssetsAllocation groups={activeRisk.groups}  onAssetsClick={ (group)=> {this.onAssetsClick(group) } }/>
         </Aux>
         )
+    };
+
+    onAssetsClick = (group) => {
+        const activeRisk = this.props.risks.find(risk => risk.risk.score === 7);
+        const activeProjection = activeRisk.projections.filter(projection => {
+            return projection.etf_symbol === group.description
+        });
+        this.setState({
+            ...this.state,
+            activeGroup: {...group},
+            activeProjection: activeProjection
+        });
+        $("#alloccatioModal").modal("show");
     };
 
     render () {
@@ -145,6 +172,8 @@ class goalResults extends Component {
                         { this.handleSettings() }
                     </div>
                 </div>
+                <AllocationModal activeGroup={this.state.activeGroup} activeProjection={this.state.activeProjection}/>
+                <ErrorModal errorMessage={this.state.errorMessage}/>
             </Aux>
         )
     }

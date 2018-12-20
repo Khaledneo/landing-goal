@@ -57,7 +57,7 @@ export const plan = (props) => {
                 <div className="data">
                     <h3>{props.planData.name} Deposit</h3>
                     <div className="custom-row">
-                        <span>Initial Inves btment</span>
+                        <span>Initial Investment</span>
                         <span>{props.planData.initial_investment}</span>
                     </div>
                     <div className="custom-row">
