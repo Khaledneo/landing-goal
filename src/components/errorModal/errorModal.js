@@ -3,7 +3,6 @@ import Aux from "../../Hoc/Aux";
 import "./errorModal.scss";
 
 const errorModal = (props) => {
-    console.log(props.errorMessage);
     return (
         <Aux>
             <div className="modal fade" id="errorModal" tabIndex="-1" role="dialog" aria-labelledby="errorModal"

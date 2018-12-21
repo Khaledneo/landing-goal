@@ -1,6 +1,7 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
 import { numberMask } from "../../util/masks";
+import Select from 'react-select';
 import MaskedInput from "react-text-mask";
 
 import "./information.scss";
@@ -8,22 +9,22 @@ import "./information.scss";
 
 const optionsReasons = [{
         key: 3,
-        text: "major purchases",
+        label: "major purchases",
         value: 'major_purchase'
     },
     {
         key: 1,
-        text: "education",
+        label: "education",
         value: 'education'
     },
     {
         key: 2,
-        text: "retirement",
+        label: "retirement",
         value: 'retirement'
     },
     {
         key: 4,
-        text: "safety net",
+        label: "safety net",
         value: 'safety_net'
     }
 ];
@@ -38,8 +39,24 @@ const getDropDownOptions = () => {
     });
 };
 
+const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      fontSize: "20px",
+      borderBottom: '1px solid black',
+      color:  "#333333",
+      padding: 10,
+    }),
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = 'opacity 300ms';
+        
+      return { ...provided, opacity, transition };
+    }
+}
+
 const information = (props) => {
-    let dropdownOptions = getDropDownOptions()
+    console.log(props.userInformation.reason);
     return (
         <Aux>
             <div className="information">
@@ -51,9 +68,17 @@ const information = (props) => {
                 onChange={props.onValueChange}
                 value={props.userInformation.age}
                 placeholder="25"/> years old and i want to invest for
-                <select className="selectpicker" name="reason" value={props.userInformation.reason} onChange={props.onValueChange}>
+                <Select
+                className="react-select-container"
+                classNamePrefix="react-select"
+                styles={customStyles}
+                value={props.userInformation.reason}
+                onChange={props.onValueChange}
+                options={optionsReasons}
+                />
+                {/* <select className="selectpicker" name="reason" value={props.userInformation.reason} onChange={props.onValueChange}>
                     {dropdownOptions}
-                </select>
+                </select> */}
                 <br/>
                 In                
                 <MaskedInput

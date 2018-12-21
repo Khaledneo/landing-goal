@@ -64,6 +64,28 @@ $black: #333333;
         max-width: 180px;
         width: 180px;
     }
+    .react-select-container {
+        display: inline-block;
+        width: 200px;
+        outline: none !important;
+        box-shadow: none ;
+        margin-left: 10px;
+        border-bottom: 2px solid black;
+        .react-select__value-container {
+            padding: 0;
+        }
+        .react-select__indicator-separator {
+            display: none;
+        }
+        .react-select__control--is-focused {
+            outline: none;
+            border: none;
+        }
+        .react-select__control {
+            border: none;
+            outline: none !important;
+        }
+    }
 }
 @media (max-width:991px) {
     .information {

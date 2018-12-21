@@ -14,7 +14,7 @@ class goalInput extends Component {
         super(props);
         this.state = {
             age: "",
-            reason: "",
+            reason: "education",
             horizon: "",
             amount: "",
             initial_investment: ""
