@@ -24,7 +24,7 @@ class goalResults extends Component {
         super(props);
         this.state = {
             errorMessage: "",
-            isSettingsCollapsed: false,
+            isSettingsCollapsed: true,
             isLoading: false,
             activeGroup: {},
             activeProjection: {}
