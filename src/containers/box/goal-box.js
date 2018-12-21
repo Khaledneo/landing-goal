@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { goalResults as GoalResults } from '../recommendation/goal-result';
 import { goalInput as GoalInput } from "../goal/goal-input";
 import {loader as Loader} from "../../components/loader/loader";
+import { parseURLParams,validateGoalsInput } from "../../util/util";
 import { cashOption } from "../../constants/variables";
 import axios from "axios";
 import Aux from "../../Hoc/Aux";
@@ -21,9 +22,11 @@ class goalBox extends Component {
 
     constructor(props) {
       super(props);
+
         this.state =  {
             recommendationsResult: [],
             risks: [],
+            errorMessage: "",
             inputs: {}
         };
     };
@@ -55,9 +58,46 @@ class goalBox extends Component {
     };
 
     componentDidMount  () {
-      //TODO: Catch the info from the header
       this.fetchRiskScore();
     }
+
+    componentWillMount() {
+      this.getUrlData();
+    };
+
+    getUrlData = () => {
+      const params = parseURLParams(window.location.href);
+      if(params) {
+        let inputsParams = this.updateParametersForm(params);
+        let paramsValidation  = validateGoalsInput(inputsParams);
+        if(paramsValidation.errorOccurred) {
+          this.updateStateErrorMessage(paramsValidation.errorMessage);
+        }else {
+          this.setState({
+            ...this.state,
+            inputs: {...inputsParams,initial_investment: 0}
+          },()=>{
+            this.fetchRecommenations(inputsParams.amount,inputsParams.horizon);
+          });
+        }
+      }
+    };
+
+    updateStateErrorMessage = (errorMessage) => {
+      this.setState({
+          ...this.state,
+          errorMessage: errorMessage
+      });
+    };
+
+    updateParametersForm = (params) => {
+      for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            params[key] = params[key][0]
+        }
+    };
+    return params;
+    };
     
     fillCash(data) {
       for (let i = 0; i < data.length; i++) {
@@ -90,6 +130,8 @@ class goalBox extends Component {
       });
     };
 
+
+
     renderContent(){
       if(!Object.keys(this.state.inputs).length){
       return  <GoalInput  onContinue={(inputs)=>{ this.handleContinue(inputs)}}/>
@@ -106,7 +148,6 @@ class goalBox extends Component {
 
     render() {
       const content = this.renderContent();
-      const loadeing = this.handleLoading();
       return (
         <Aux>
           <Loader />

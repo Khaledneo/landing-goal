@@ -13,11 +13,11 @@ class goalInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            age: "18",
-            reason: "education",
-            horizon: "5",
-            amount: "5000",
-            initial_investment: "0"
+            age: "",
+            reason: "",
+            horizon: "",
+            amount: "",
+            initial_investment: ""
         };
     };
 
@@ -25,6 +25,7 @@ class goalInput extends Component {
 
     validateInput = () => {
         let validationResult = validateGoalsInput(this.state);
+        console.log(validationResult);
         if(validationResult.errorOccurred) {
             this.openModalError(validationResult.errorMessage);
         } else {
@@ -36,8 +37,9 @@ class goalInput extends Component {
       this.setState({
           ...this.state,
           errorMessage: errorMessage
+      },()=> {
+          $("#errorModal").modal("show");
       });
-      $("#errorModal").modal("show");
     };
 
     changeValue = (e) => {

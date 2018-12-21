@@ -39,6 +39,7 @@ const getDropDownOptions = () => {
 };
 
 const information = (props) => {
+    let dropdownOptions = getDropDownOptions()
     return (
         <Aux>
             <div className="information">
@@ -51,7 +52,7 @@ const information = (props) => {
                 value={props.userInformation.age}
                 placeholder="25"/> years old and i want to invest for
                 <select className="selectpicker" name="reason" value={props.userInformation.reason} onChange={props.onValueChange}>
-                    {getDropDownOptions()}
+                    {dropdownOptions}
                 </select>
                 <br/>
                 In                
