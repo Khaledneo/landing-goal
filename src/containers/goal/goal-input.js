@@ -14,7 +14,11 @@ class goalInput extends Component {
         super(props);
         this.state = {
             age: "",
-            reason: "education",
+            reason: {
+                key: 3,
+                label: "major purchases",
+                value: 'major_purchase'
+            },
             horizon: "",
             amount: "",
             initial_investment: ""
@@ -25,7 +29,6 @@ class goalInput extends Component {
 
     validateInput = () => {
         let validationResult = validateGoalsInput(this.state);
-        console.log(validationResult);
         if(validationResult.errorOccurred) {
             this.openModalError(validationResult.errorMessage);
         } else {
@@ -46,9 +49,6 @@ class goalInput extends Component {
         const inputName = e.target.name;
         let inputValue = null;
         switch(inputName){
-            case "reason":
-            inputValue = e.target.value;
-            break;
             case "amount":
             inputValue =  parseInt(e.target.value.replace(/\$/g, "").replace(/,/g, ""));
             if(isNaN(inputValue)) {
@@ -64,6 +64,15 @@ class goalInput extends Component {
         });
     };
 
+    changeReason = (reason) => {
+        this.setState({
+            ...this.state,
+            reason: reason
+        },()=>{
+            console.log(this.state.reason);
+        });
+    };
+
     render() {
         return (
             <Aux>
@@ -71,6 +80,7 @@ class goalInput extends Component {
                 <Information
                     userInformation={this.state}
                     onValueChange={this.changeValue}
+                    onReasonChange={this.changeReason}
                     />
                  <ErrorModal errorMessage={this.state.errorMessage}/>
                 <div className="button-group">
