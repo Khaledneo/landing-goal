@@ -39,8 +39,29 @@ const getDropDownOptions = () => {
     });
 };
 
+// TODO: Moved to config file
 const customStyles = {
-    option: (provided, state) => ({
+    container: (provider) => ({
+        ...provider,
+        display: "inline-block",
+        width: "200px",
+        marginLeft: "10px",
+        lineHeight: 0.5
+    }),
+    valueContainer: (provider) => ({
+        ...provider,
+        padding: 0
+    }),
+    control: (provider) => ({
+        ...provider,
+        border: "none",
+        borderBottom: "2px solid #333333",
+        borderRadius: "0px"
+    }),
+    indicatorSeparator: () => ({
+        display: "none"
+    }),
+    option: (provided) => ({
       ...provided,
       fontSize: "20px",
       borderBottom: '1px solid black',
@@ -50,7 +71,6 @@ const customStyles = {
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = 'opacity 300ms';
-        
       return { ...provided, opacity, transition };
     }
 }
