@@ -1,6 +1,7 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
 import { dropDownStyle } from "../../constants/variables";
+import { Dropdown} from "semantic-ui-react";
 import { numberMask } from "../../util/masks";
 import Select from 'react-select';
 import MaskedInput from "react-text-mask";
@@ -10,25 +11,29 @@ import "./information.scss";
 
 const optionsReasons = [{
         key: 3,
-        label: "major purchases",
+        text: "major purchases",
         value: 'major_purchase'
     },
     {
         key: 1,
-        label: "education",
+        text: "education",
         value: 'education'
     },
     {
         key: 2,
-        label: "retirement",
+        text: "retirement",
         value: 'retirement'
     },
     {
         key: 4,
-        label: "safety net",
+        text: "safety net",
         value: 'safety_net'
     }
 ];
+
+const onUpdateRiskScore = (value) => {
+    console.log(value);
+};
 
 const information = (props) => {
     const { reason } = props.userInformation;
@@ -36,8 +41,8 @@ const information = (props) => {
         <Aux>
             <div className="information">
                 <div className="line">
-                I am    
-                <MaskedInput
+                    I am    
+                    <MaskedInput
                     mask={[/\d/,/\d/]}
                     type="text"
                     name="age"
@@ -45,17 +50,17 @@ const information = (props) => {
                     value={props.userInformation.age}
                     placeholder="25"/> 
                     years old and i want to invest for
-                    <Select
-                    className="react-select-container"
-                    classNamePrefix="react-select"
-                    placeholder="reason"
-                    styles={dropDownStyle}
-                    isSearchable={false}
-                    defaultValue={reason}
+                    <div className="inline-text">
+                    <Dropdown
+                    inline
                     value={reason}
-                    onChange={props.onReasonChange}
                     options={optionsReasons}
+                    placeholder="Select Reason"
+                    onChange={(e, { value }) => {
+                        props.onReasonChange(value)
+                    }}
                     />
+                    </div>
                 </div>
                 <div className="line"> 
                     In                

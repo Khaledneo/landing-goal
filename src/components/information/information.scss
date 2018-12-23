@@ -4,14 +4,14 @@ $black: #333333;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 21px;
+    font-size: 26px;
     margin: 80px 0;
     color: $black;
-    * {
-        color: $black;
-        font-size: 21px;
-    }
     div {
+        &.inline-text {
+            display: inline-block;
+            margin-left: 10px;
+        }
         &.line {
             line-height: 30px;
             text-align: center;
@@ -51,35 +51,31 @@ $black: #333333;
             width: 35px;
         }
     }
-    .selectpicker {
-        -webkit-appearance: none;
-        appearance: none;
-        border-radius: 0;
-        outline: none;
-        background-color: transparent;
-        border: none;
-        text-align: center;
-        color: #2179ee;
-        margin-left: 15px;
-        border-bottom: 2px solid $black !important;
-    }
     .long-text {
         max-width: 180px;
         width: 180px;
     }
-    .react-select-container {
-        line-height: 1;
-        input {
-            border-bottom: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
+    .ui.dropdown {
+        .text {
+            font-weight: normal;
         }
+        >div{
+            color: #0076ff;
+            font-weight: normal;
+            &.default{
+                color:#777777;
+            }
+        }
+        .menu{
+            width:100%;
+        }
+        border-bottom: 2px solid #333333;
+        padding-bottom: 5px;
     }
 }
 
 @media (max-width:991px) {
     .information {
-        font-size: 21px;
         div {
             &.line {
                 &:first-child{
@@ -87,24 +83,17 @@ $black: #333333;
                 }
             }
         }
-        * {
-            font-size: 21px;
-        }
     }
 }
 
 @media (max-width: 767px) {
     .information {
-        font-size: 20px;
         div {
             &.line {
                 &:first-child{
                     margin-bottom: 50px;
                 }
             }
-        }
-        * {
-            font-size: 20px;
         }
     }
 }

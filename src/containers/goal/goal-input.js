@@ -14,11 +14,7 @@ class goalInput extends Component {
         super(props);
         this.state = {
             age: "",
-            reason: {
-                key: 3,
-                label: "major purchases",
-                value: 'major_purchase'
-            },
+            reason: "major_purchase",
             horizon: "",
             amount: "",
             initial_investment: "0"
@@ -78,7 +74,7 @@ class goalInput extends Component {
                 <Information
                     userInformation={this.state}
                     onValueChange={this.changeValue}
-                    onReasonChange={this.changeReason}
+                    onReasonChange={(value) => (this.changeReason(value))}
                     />
                  <ErrorModal errorMessage={this.state.errorMessage}/>
                 <div className="button-group">

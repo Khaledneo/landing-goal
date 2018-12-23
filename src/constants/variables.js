@@ -9,8 +9,6 @@ export const dropDownStyle = {
     container: (provider, state) => ({
         ...provider,
         cursor: "pointer",
-        display: "inline-block",
-        width: "200px",
         marginLeft: "10px"
     }),
     valueContainer: (provider) => ({
