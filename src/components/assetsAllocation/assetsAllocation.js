@@ -46,7 +46,6 @@ export const assetsAllocation = (props) => {
     const groups = getGroups(props.groups,props.onAssetsChange);
     return (    
         <Aux>
-
             <div className="allocationName titles">
                     <div className="label assets">Assets Class</div>
                     <div className="percentage">Allocation</div>

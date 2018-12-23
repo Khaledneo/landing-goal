@@ -144,11 +144,13 @@ class goalBox extends Component {
 
     render() {
       const content = this.renderContent();
+      const goalTitle = this.state.recommendationsResult.length ? <h1 className="goal-calculator-title">Goal Calculator</h1> : null
       return (
         <Aux>
           {this.handleLoading()}
           <Loader />
           <div className="container">
+             {goalTitle}
             <div id="box">
               { content }
             </div>

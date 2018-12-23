@@ -109,6 +109,7 @@
     }
 }
 @media (max-width: 767px) {
+.plan {
     .plan-header {
         padding-bottom: 24px !important;
     }
@@ -121,4 +122,5 @@
     .plan-image {
         display: none;
     }
+}
 }
