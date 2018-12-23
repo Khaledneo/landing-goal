@@ -1,5 +1,6 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
+import { dropDownStyle } from "../../constants/variables";
 import { numberMask } from "../../util/masks";
 import Select from 'react-select';
 import MaskedInput from "react-text-mask";
@@ -29,47 +30,6 @@ const optionsReasons = [{
     }
 ];
 
-// TODO: Moved to config file
-const customStyles = {
-    container: (provider, state) => ({
-        ...provider,
-        cursor: "pointer",
-        display: "inline-block",
-        width: "200px",
-        marginLeft: "10px"
-    }),
-    valueContainer: (provider) => ({
-        ...provider,
-        padding: 0,
-        cursor: "pointer"
-    }),
-    control: (provider, state) => ({
-        ...provider,
-        borderColor: state.isSelected ? "#333333" : "#333333",
-        border: "none",
-        boxShadow: "0",
-        borderBottom: "2px solid #333333",
-        borderRadius: "0px"
-    }),
-    indicatorSeparator: () => ({
-        display: "none"
-    }),
-    option: (provided,state) => ({
-      ...provided,
-      fontSize: "20px",
-      cursor: "pointer",
-      borderBottom: '1px solid black',
-      backgroundColor: state.isSelected ? '#2179ee' : 'white',
-      color:  state.isSelected ?  "white" : "#333333",
-      padding: 10,
-    }),
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = 'opacity 300ms';
-      return { ...provided, opacity,color: "#333333", transition };
-    }
-}
-
 const information = (props) => {
     const { reason } = props.userInformation;
     return (
@@ -89,7 +49,7 @@ const information = (props) => {
                     className="react-select-container"
                     classNamePrefix="react-select"
                     placeholder="reason"
-                    styles={customStyles}
+                    styles={dropDownStyle}
                     isSearchable={false}
                     defaultValue={reason}
                     value={reason}

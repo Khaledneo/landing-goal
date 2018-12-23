@@ -15,15 +15,11 @@ const $ = window.$;
 
 class goalBox extends Component {
 
-    state = {
-      isLoadingRiskScore: false,
-      isLoadingRecommendations: false
-    }
-
     constructor(props) {
       super(props);
-
         this.state =  {
+            isLoadingRiskScore: false,
+            isLoadingRecommendations: false,
             recommendationsResult: [],
             risks: [],
             errorMessage: "",

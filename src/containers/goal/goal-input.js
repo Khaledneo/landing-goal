@@ -21,7 +21,7 @@ class goalInput extends Component {
             },
             horizon: "",
             amount: "",
-            initial_investment: ""
+            initial_investment: "0"
         };
     };
 
@@ -68,8 +68,6 @@ class goalInput extends Component {
         this.setState({
             ...this.state,
             reason: reason
-        },()=>{
-            console.log(this.state.reason);
         });
     };
 

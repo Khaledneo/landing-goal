@@ -13,7 +13,7 @@ $black: #333333;
     }
     div {
         &.line {
-            line-height: 10px;
+            line-height: 30px;
             text-align: center;
             height: 65px;
             margin: 0px;
@@ -98,9 +98,8 @@ $black: #333333;
         font-size: 20px;
         div {
             &.line {
-                line-height: 30px;
                 &:first-child{
-                    margin-bottom: 25px;
+                    margin-bottom: 50px;
                 }
             }
         }
