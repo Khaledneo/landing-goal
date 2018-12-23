@@ -128,14 +128,13 @@ class goalResults extends Component {
             this.setState({
                 isLoading: true
             });
-            let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/7`);
+            let response = await axios.get(`/profile/default_recommendations/${initial_investment}/${amount}/${horizon}/6`);
             let recommendationsResult = this.fillCollapsed(response.data)
             this.setState({
                 ...this.state,
                 isLoading: false,
                 recommendations: recommendationsResult,
             });
-            console.log(this.state.isLoading);
         } catch (exception) {
             console.log(JSON.stringify(exception, null, 2));
         }

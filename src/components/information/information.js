@@ -49,7 +49,7 @@ const information = (props) => {
                     onChange={props.onValueChange}
                     value={props.userInformation.age}
                     placeholder="25"/> 
-                    years old and i want to invest for
+                    years old and I want to invest for
                     <div className="inline-text">
                     <Dropdown
                     inline

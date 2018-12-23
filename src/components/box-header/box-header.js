@@ -7,7 +7,7 @@ const boxHeader = (props) => {
         <Aux>
             <div className="box-header">
                 <h1>Goal Calculator</h1>
-                <span>Complete the bellow base on your goals</span>
+                <span>Complete the below based on your goals</span>
             </div>
         </Aux>
         

@@ -33,7 +33,7 @@ class goalBox extends Component {
         this.setState({
           isLoadingRecommendations: true
         });
-        let response = await axios.get(`/profile/default_recommendations/0/${amount}/${horizon}/7`);
+        let response = await axios.get(`/profile/default_recommendations/0/${amount}/${horizon}/6`);
         let recommendationsResult = this.fillCollapsed(response.data);
         this.setState({
           isLoadingRecommendations: false,

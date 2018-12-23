@@ -52,6 +52,8 @@ export const plan = (props) => {
     const bakgroundImage = {
         backgroundImage: `url(${props.planData.image})`
     };
+    const recurring = addCommaToNumber(parseInt(props.planData.recurring_investment));
+   
     return (
         <Aux>
             <div className="plan">
@@ -72,7 +74,7 @@ export const plan = (props) => {
                         </div>
                         <div className="custom-row">
                             <span>{props.planData.name} Deposit</span>
-                            <span>${props.planData.recurring_investment}</span>
+                            <span>${recurring}</span>
                         </div>
                         <div className="custom-row">
                             <span>Investment Horizon</span>

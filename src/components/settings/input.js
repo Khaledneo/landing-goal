@@ -55,7 +55,7 @@ const settingsInput = (props) => {
                 <label>
                     Risk Score
                 </label>
-                <input className="dropdown" disabled="disabled" value="7/10(Balanced)" />
+                <input className="dropdown" disabled="disabled" value="6/10(Balanced)" />
             </div>
               
         </Aux>

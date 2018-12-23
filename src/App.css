@@ -5,9 +5,10 @@
   src: url("/assets/fonts/Regular/SanFranciscoDisplay-Regular.ttf") format("truetype");
 };
 
-#main {
-  background-color: #fafafa;
-}
+/* #main {
+  background-color: yellow !important;
+} */
+
 .App {
   font-family: "San Francisco Regular";
   text-align: center;
