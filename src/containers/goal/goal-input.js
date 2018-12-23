@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Aux from "../../Hoc/Aux";
 import { validateGoalsInput } from "../../util/util";
+import "./goal-input.scss";
 import {boxHeader as BoxHeader} from "../../components/box-header/box-header";
 import {errorModal as ErrorModal} from "../../components/errorModal/errorModal";
 import {information as Information} from "../../components/information/information";

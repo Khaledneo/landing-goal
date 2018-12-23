@@ -7,4 +7,9 @@
     margin: 0 auto;
     position: relative;
     background-color: #fafafa;
+    * {
+     &:not(i) {
+         font-family: "San Francisco";
+     }
+    }
 };

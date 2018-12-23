@@ -1,21 +1,20 @@
-@font-face {
+/* @font-face {
   font-family: "San Francisco Regular";
   font-weight: 400;
   font-style: normal;
   src: url("/assets/fonts/Regular/SanFranciscoDisplay-Regular.ttf") format("truetype");
-};
+}; */
 
 /* #main {
   background-color: yellow !important;
 } */
 
 .App {
-  font-family: "San Francisco Regular";
   text-align: center;
 }
 
 .cairo {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Cairo', sans-serif !important;
 }
 
 .App-logo {
