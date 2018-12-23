@@ -146,6 +146,7 @@ class goalBox extends Component {
       const content = this.renderContent();
       return (
         <Aux>
+          {this.handleLoading()}
           <Loader />
           <div className="container">
             <div id="box">
