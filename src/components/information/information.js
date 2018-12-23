@@ -1,9 +1,7 @@
 import React from "react";
 import Aux from "../../Hoc/Aux";
-import { dropDownStyle } from "../../constants/variables";
 import { Dropdown} from "semantic-ui-react";
 import { numberMask } from "../../util/masks";
-import Select from 'react-select';
 import MaskedInput from "react-text-mask";
 
 import "./information.scss";
@@ -31,9 +29,6 @@ const optionsReasons = [{
     }
 ];
 
-const onUpdateRiskScore = (value) => {
-    console.log(value);
-};
 
 const information = (props) => {
     const { reason } = props.userInformation;

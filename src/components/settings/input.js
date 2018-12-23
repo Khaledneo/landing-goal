@@ -46,7 +46,7 @@ const settingsInput = (props) => {
                   mask={initialDepositNumberMask}
                   type="text"
                   name="initial_investment"
-                  value={props.data.initial_investment}
+                  value={props.initialInvestment}
                   onBlur={props.onBlur}
                   onKeyPress={props.onChange}
                   onChange={props.onChange}/>

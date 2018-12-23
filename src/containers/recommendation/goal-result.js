@@ -111,8 +111,9 @@ class goalResults extends Component {
                 ...this.state,
                 amount: this.state.inputs.amount,
                 horizon: this.state.horizon
-            })
-            this.fetchResult();
+            },() => {
+                this.fetchResult();
+            });
         }
     };
 
@@ -143,12 +144,14 @@ class goalResults extends Component {
     };
 
     fillCollapsed = (recommendations) => {
-        return recommendations.map(plan => {
+        let updatedRecommendations = 
+         recommendations.map(plan => {
             return {
                 ...plan,
                 isCollapsed: true
             }
         });
+        return updatedRecommendations;
     };
 
 
@@ -165,9 +168,9 @@ class goalResults extends Component {
         return !this.state.isSettingsCollapsed && (
         <Aux>
             <div className="row settings-input">
-                <SettingsInput onBlur={this.handleBlur}  onChange={this.changeValue} data={this.state.inputs}/>
+                <SettingsInput onBlur={this.handleBlur}  onChange={this.changeValue} initialInvestment={this.state.recommendations[0].initial_investment} data={this.state.inputs}/>
             </div>
-            <AssetsAllocation groups={activeRisk.groups}  onAssetsClick={ (group)=> {this.onAssetsClick(group) } }/>
+            <AssetsAllocation groups={activeRisk.groups}  onAssetsChange={ (group)=> {this.onAssetsClick(group) } }/>
         </Aux>
         )
     };

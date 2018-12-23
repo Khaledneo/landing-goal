@@ -82,7 +82,7 @@ export const plan = (props) => {
                         </div>
                         <div className="custom-row">
                             <span>Risk Tolerance</span>
-                            <span>Balanced (7/10)</span>
+                            <span>Balanced (6/10)</span>
                         </div>
                     </div>
                     <div className="chart">

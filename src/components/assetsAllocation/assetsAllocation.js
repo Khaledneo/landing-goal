@@ -43,7 +43,7 @@ const getGroups = (groups,onAssetsClick) => {
 };
 
 export const assetsAllocation = (props) => {
-    const groups = getGroups(props.groups,props.onAssetsClick);
+    const groups = getGroups(props.groups,props.onAssetsChange);
     return (    
         <Aux>
 

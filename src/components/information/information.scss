@@ -87,7 +87,9 @@ $black: #333333;
 }
 
 @media (max-width: 767px) {
+
     .information {
+        font-size: 21px;
         div {
             &.line {
                 &:first-child{
